@@ -108,7 +108,8 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
         (totalesPorVendedor[vendedor].valorBruta * adminZona) / 100,
       Premios: premiosPorEmail[vendedor] || "N/A",
       "Balance Final":
-        (totalesPorVendedor[vendedor].valorBruta * adminZonaVentaNeta) / 100 -
+        (totalesPorVendedor[vendedor].valorBruta * adminZonaVentaNeta) / 100 +
+        (totalesPorVendedor[vendedor].valorBruta * adminZona) / 100 -
         (premiosPorEmail[vendedor] || 0),
     }));
 
@@ -127,7 +128,14 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
         0
       ),
       Premios: premiosTotales,
-      "Balance Final": balanceTotal,
+      "Balance Final": Object.keys(totalesPorVendedor).reduce(
+        (acc, key) =>
+          acc +
+          (totalesPorVendedor[key].valorBruta * adminZonaVentaNeta) / 100 +
+          (totalesPorVendedor[key].valorBruta * adminZona) / 100 -
+          (premiosPorEmail[key] || 0),
+        0
+      ),
     });
 
     const worksheet = XLSX.utils.json_to_sheet(data);
@@ -141,6 +149,7 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
     ];
     worksheet["!cols"] = columnWidths;
 
+    // Formato de la primera fila (encabezados)
     Object.keys(worksheet).forEach((key) => {
       if (
         key.startsWith("A1") ||
@@ -230,13 +239,12 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
           Descargar en Excel
         </button>
       </div>
-
       <Table
         style={{
           backgroundColor: "#13151a",
         }}
         isStriped
-        className="text-white rounded-xl w-full md:max-w-[1200px] mx-auto p-0 m-0 "
+        className="text-white rounded-xl w-full md:max-w-[1200px] mx-auto p-0 m-0"
         aria-label="Example static collection table"
       >
         <TableHeader>
@@ -248,7 +256,7 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
               className="text-white shadow-2xl border-b-2 border-white rounded-xl"
               key={index}
             >
-              <p className="flex items-center gap-2 ">
+              <p className="flex items-center gap-2">
                 {col.name} {col.icon && <col.icon />}
               </p>
             </TableColumn>
@@ -273,13 +281,14 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
               <TableCell>
                 {formatPesoCop(
                   (totalesPorVendedor[key].valorBruta * adminZonaVentaNeta) /
-                    100 -
-                    premiosPorEmail[key]
+                    100 +
+                    (totalesPorVendedor[key].valorBruta * adminZona) / 100 -
+                    (premiosPorEmail[key] || 0)
                 )}
               </TableCell>
             </TableRow>
           ))}
-          {/* Fila con totales */}
+          {/* Fila de Totales */}
           <TableRow>
             <TableCell>Total</TableCell>
             <TableCell>
@@ -303,7 +312,19 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
               )}
             </TableCell>
             <TableCell>{formatPesoCop(premiosTotales)}</TableCell>
-            <TableCell>{formatPesoCop(balanceTotal)}</TableCell>
+            <TableCell>
+              {formatPesoCop(
+                Object.keys(totalesPorVendedor).reduce(
+                  (acc, key) =>
+                    acc +
+                    (totalesPorVendedor[key].valorBruta * adminZonaVentaNeta) /
+                      100 +
+                    (totalesPorVendedor[key].valorBruta * adminZona) / 100 -
+                    (premiosPorEmail[key] || 0),
+                  0
+                )
+              )}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>
