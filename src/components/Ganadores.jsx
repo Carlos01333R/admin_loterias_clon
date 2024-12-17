@@ -98,7 +98,7 @@ export default function GanadoresLoterias() {
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={`https://admin-loterias.vercel.app/ticket?ref_venta=${match.numero_venta}`}
+                          href={`https://loteria-ticket-es.vercel.app/ticket?ref_venta=${match.numero_venta}`}
                           className="bg-green-500 p-3 rounded-lg text-white"
                         >
                           {match.numero_venta}

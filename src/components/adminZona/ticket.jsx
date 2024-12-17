@@ -376,7 +376,7 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
 
                 <div className="w-full flex justify-center items-center mt-1 mb-2">
                   <a
-                    href={`https://admin-loterias.vercel.app/ticket?ref_venta=${venta.numero_venta}`}
+                    href={`https://loteria-ticket-es.vercel.app/ticket?ref_venta=${venta.numero_venta}`}
                     target="_blank"
                     rel="noreferrer"
                     className="bg-zinc-900 text-white rounded-lg px-1 py-2 text-sm"
