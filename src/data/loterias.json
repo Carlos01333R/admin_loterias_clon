@@ -1,0 +1,1296 @@
+{
+    "loterias": [
+        {
+            "name": "TOLIMA",
+            "days": [
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:20",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo": "https://files.lafm.com.co/assets/public/styles/facebook2/public/2024-01/loteriatolima9_01_2024.jpg.webp?VersionId=_sxIopcE5GcckmB4AH_gT2vCuIXFFbvG&itok=6kV4oNes"
+        },
+        {
+            "name": "CUNDINAMARCA",
+            "days": [
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:20",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://www.pagatodo.com.co/sites/default/files/LC.png"
+        },
+        {
+            "name": "HUILA",
+            "days": [
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://cafeterito.co/images/loteria-del-huila.png"
+        },
+        {
+            "name": "CRUZ ROJA",
+            "days": [
+               {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+               }
+            ],
+            "logo" : "https://depor.com/resizer/v2/P74OEHVPLJHBBIXW5VX3AF4ULM.png?auth=eafd4d22aea46f287004dd9a6164b251a3bb552e2d053f2eab7613992179a46f&width=1200&height=680&quality=90&smart=true"
+           
+        },
+        {
+            "name": "VALLE",
+            "days": [
+               {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+               
+               }
+            ],
+            "logo" : "https://s.resultadodelchance.com/img/news/rdc_8.jpg?class=big"
+        },
+        {
+            "name": "META",
+            "days": [
+              {
+                "dia": "MIERCOLES",
+                "apertura": "00:05",
+                "cierre": "22:15"
+              }
+            ],
+            "logo" : "https://sinuano.co/images/loteria-del-meta.png"
+        },
+        {
+            "name": "MANIZALES",
+            "days": [
+               {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+               }
+            ],
+            "logo" : "https://iconape.com/wp-content/files/so/251557/png/251557.png"
+        },
+        {
+            "name": "BOGOTA",
+            "days": [
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2022/09/16/resultados-loteria-de-bogota-1066873-0.jpg"
+        },
+        {
+            "name": "QUINDIO",
+            "days": [
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://www.logotypes101.com/logos/339/4F8F96A0D318461040090882D3B41563/logo_loteria_del_quindio_expandido.png"
+        },
+        {
+            "name": "RISARALDA",
+            "days": [
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/08/5809A0E8-B776-422A-8BB0-A74C85335DE8-1166008.jpg"
+        },
+        {
+            "name": "MEDELLIN",
+            "days": [
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://loteriademedellin.com.co/wp-content/uploads/2023/11/logo-loteria-de-medellin-1.png"
+        },
+        {
+            "name": "SANTANDER",
+            "days": [
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://www.ganagana.com.co/images/loterias/santander_co.jpg"
+        },
+        {
+            "name": "BOYACA",
+            "days": [
+                {
+                    "dia": "SABADO",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://loteriadeboyaca.gov.co/wp-content/uploads/2023/03/cropped-logotipo-2023-loteria-negro.png"
+        },
+        {
+            "name": "CAUCA",
+            "days": [
+                {
+                    "dia": "SABADO",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://cafeterito.co/images/loteria-del-cauca.png"
+        },
+        {
+            "name": "EXTRA",
+            "days": [
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:01",
+                    "cierre": "21:30"
+                },
+                {
+                    "dia": "SABADO",
+                    "apertura": "00:00",
+                    "cierre": "21:30"
+                }
+            ],
+            "logo" : "https://caracoltv.brightspotcdn.com/dims4/default/6680dbe/2147483647/strip/true/crop/1280x720+0+0/resize/800x450!/quality/90/?url=http%3A%2F%2Fcaracol-brightspot.s3.us-west-2.amazonaws.com%2Fcb%2F86%2Fec2b56fe4c828134446605bbf52c%2Floteria-extra-de-colombia.jpg"
+        },
+        {
+            "name": "ANTIOQUEÑITA 1",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "09:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "09:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:06",
+                    "cierre": "09:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "09:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "09:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:04",
+                    "cierre": "09:40"
+                }
+            ],
+            "logo" : "https://img.resultadoscolombia.com/games/antioquenita-1-dia.webp?format=auto&quality=75&width=828"
+        },
+        {
+            "name": "ANTIOQUEÑITA 2",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "15:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "01:00",
+                    "cierre": "15:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "15:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "15:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "15:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "15:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "15:40"
+                }
+            ],
+            "logo" : "https://d2yoo3qu6vrk5d.cloudfront.net/pulzo-lite/images-resized/PP4007813A-h-s.webp"
+        },
+        {
+            "name": "ASTRO LUNA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:06",
+                    "cierre": "22:15"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "22:15"
+                }
+            ],
+            "logo" : "https://www.semana.com/resizer/v2/MMPFZR7AKVEKVGRL5QZNBAE7R4.jpg?auth=8a51a20957ebd7785289acee09e8d7577a4b2148bb3acbfab8587fb4398937de&smart=true&quality=75&width=1280"
+        },
+        {
+            "name": "ASTRO SOL",
+            "days": [
+               
+                {
+                    "dia": "LUNES",
+                    "apertura": "01:00",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "01:00",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "01:00",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "01:00",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "01:00",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:00",
+                    "cierre": "14:00"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/10/D03AF737-4B30-4DD3-966D-65088E403AA5-1166507-0.jpg"
+        },
+        {
+            "name": "CAFETERITO NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "19:40"
+                }
+            ],
+            "logo" : "https://paisita.co/images/cafeterito-noche.png"
+        },
+        {
+            "name": "CAFETERITO TARDE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:06",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "11:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:04",
+                    "cierre": "11:40"
+                }
+            ],
+            "logo" : "https://d2yoo3qu6vrk5d.cloudfront.net/pulzo-lite/images-resized/PP4008380A-h-s.webp"
+        },
+        {
+            "name": "CARIBEÑA DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "13:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "01:00",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                }
+            ],
+            "logo" : "https://www.semana.com/resizer/v2/4OAHDXGUEJEI3JWET5U4QJT7CQ.jpg?auth=328246f953d9d14d8591e36940cf0de20283dd70b18d33edd650fc0a8c3c2f42&smart=true&quality=75&width=1280&fitfill=false"
+        },
+        {
+            "name": "CARIBEÑA NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:30"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "01:05",
+                    "cierre": "19:30"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:06",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                }
+            ],
+            "logo" : "https://paisita.co/images/caribena-noche.png"
+        },
+        {
+            "name": "CHONTICO DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "12:45"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/10/6DCDBA3A-FA47-45DB-9C28-DC38058DB632-1166509.jpg"
+        },
+        {
+            "name": "CHONTICO NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "18:30"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "18:30"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "18:30"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "18:30"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "18:30"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "18:30"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:04",
+                    "cierre": "18:30"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/07/853E3014-041A-4536-8B62-341A73E96F6F-1165971.jpg"
+        },
+        {
+            "name": "CULONA DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                }
+            ],
+            "logo" : "https://img.resultadoscolombia.com/games/culona-dia.webp?format=auto&quality=75&width=828"
+        },
+        {
+            "name": "CULONA NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:03"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:06",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "20:05"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                }
+            ],
+            "logo" : "https://img.resultadoscolombia.com/games/culona-noche.webp?format=auto&quality=75&width=828"
+        },
+        {
+            "name": "DORADO MAÑANA",
+            "days": [
+              
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "10:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "10:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:06",
+                    "cierre": "10:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "10:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "10:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "10:40"
+                }
+            ],
+            "logo" : "https://www.mundonets.com/images/dorado-manana.jpg"
+        },
+        {
+            "name": "DORADO NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "21:30"
+                }
+            ],
+            "logo" : "https://www.elpais.com.co/resizer/v2/NOUDQD4RWZDE5MR3QTTTBTXVJQ.jpg?auth=71872a407b3fb4a0af03602ad81416ae7d4d9ddffefc1169d6a68ff1efa51bae&smart=true&quality=75&width=1280&fitfill=false"
+        },
+        {
+            "name": "DORADO TARDE",
+            "days": [
+               
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:20",
+                    "cierre": "15:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "15:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "15:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "15:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "15:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "15:00"
+                }
+            ],
+            "logo" : "https://www.semana.com/resizer/v2/B27XENO32ZFCHOVR2QX33BJUNU.jpg?auth=850b16dda4b32ad62384bf3f82602afbb86c228e2358e7fac74d342257370a39&smart=true&quality=75&width=1280"
+        },
+        {
+            "name": "FANTASTICA DIA",
+            "days": [
+               
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:20",
+                    "cierre": "12:30"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "12:30"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "12:30"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "12:30"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "12:30"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "12:30"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/10/69A359C1-D7E6-4C85-A152-D34F35942533-1166709.jpg"
+        },
+        {
+            "name": "FANTASTICA NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "19:45"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "19:45"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "19:45"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "19:45"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "19:45"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "19:45"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/10/783E42D9-9BC9-4AD1-A99A-178B57BB937C-1166721.jpg"
+        }, 
+        {
+            "name": "MOTILON NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "20:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:04",
+                    "cierre": "20:00"
+                }
+            ],
+            "logo" : "https://img.resultadoscolombia.com/games/motilon-noche.webp?format=auto&quality=75&width=828"
+        },
+        {
+            "name": "MOTILON TARDE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "14:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:04",
+                    "cierre": "14:00"
+                }
+            ],
+            "logo" : "https://paisita.co/images/motilon-tarde.png"
+
+        },
+        {
+            "name": "PAISITA 3",
+            "days": [
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:00",
+                    "cierre": "21:00"
+                }
+            ],
+            "logo" : "https://resultadosloterias.com.co/images/paisita-3.jpg"
+        },
+        {
+            "name": "PAISITA DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "12:40"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/10/F9CF5A27-8ED6-441B-8C6F-E2E900D0167B-1166653.jpg"
+        },
+        {
+            "name": "PAISITA NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "17:40"
+                }
+            ],
+            "logo" : "https://d2yoo3qu6vrk5d.cloudfront.net/pulzo-lite/images-resized/PP4007794A-h-s.webp"
+
+        },
+        {
+            "name": "PIJAO DE ORO",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:06",
+                    "cierre": "18:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "13:30"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "13:30"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "13:30"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "13:30"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "13:30"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "01:00",
+                    "cierre": "19:00"
+                }
+            ],
+            "logo" : "https://paisita.co/images/pijao-de-oro.png"
+        },
+        {
+            "name": "SINUANO DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "13:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "01:00",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "14:15"
+                }
+            ],
+            "logo" : "https://cdn.colombia.com/sdi/2023/07/10/D7CD1ABC-BAD4-4DB8-8307-9745FC6E4760-1166511.jpg"
+        },
+        {
+            "name": "SINUANO NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:30"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "01:05",
+                    "cierre": "19:30"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:06",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "22:00"
+                }
+            ],
+            "logo" : "https://www.eluniversal.com.co/resizer/v2/JASZMVQVFNBWRDKPL3I4WWPRUM.jpg?auth=c4a34f05a6fb11372ad00394459b8153461abd048ca38f4743651fe114ed102b&smart=true&width=1200&height=800&quality=70"
+        },
+        {
+            "name": "CASH NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                }
+            ],
+            "logo" : "https://futbolete.com/wp-content/uploads/2023/02/Cash-Noche-resultado-del-chance-del-jueves-23-de-febrero-del-2023-1200x900.webp"
+        },
+        {
+            "name": "PLAY NOCHE",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:05",
+                    "cierre": "19:00"
+                }
+            ],
+            "logo" : "https://futbolete.com/wp-content/uploads/2023/02/Play-Four-Noche-resultado-del-chance-del-jueves-23-de-febrero-del-2023.webp"
+        },
+        {
+            "name": "CASH DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                }
+            ],
+            "logo" : "https://futbolete.com/wp-content/uploads/2021/11/cash-dia-min.jpeg"
+        },
+        {
+            "name": "PLAY DIA",
+            "days": [
+                {
+                    "dia": "DOMINGO",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "LUNES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "MARTES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "MIERCOLES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "JUEVES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "VIERNES",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                },
+                {
+                    "dia": "SÁBADO",
+                    "apertura": "00:01",
+                    "cierre": "12:00"
+                }
+            ],
+            "logo" : "https://futbolete.com/wp-content/uploads/2021/11/play-four-dia-min.jpeg"
+        }
+    ]
+}

@@ -1,0 +1,131 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import Logout from "../components/Logout.jsx";
+import Header from "../components/Header.jsx";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <Header client:load />
+  <body class="w-full h-screen bg-gray-100">
+    <main class="w-full flex h-screen">
+      <section class="w-[20%] hidden md:block bg-zinc-900">
+        <div class="flex flex-col justify-start items-center mt-10">
+          <h1 class="text-2xl font-bold text-white">Menu</h1>
+          <ul class="list-none p-4 text-white flex flex-col gap-y-2 mt-10">
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/dashboard" class="text-white">Home</a>
+            </li>
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/ventas" class="text-white">Ventas</a>
+            </li>
+
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/carteraAdmin" class="text-white">Cartera</a>
+            </li>
+
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/win" class="text-white">Ganadores hoy</a>
+            </li>
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/ganadores" class="text-white"
+                >Historial Ganadores</a
+              >
+            </li>
+
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/zonas" class="text-white">Zonas</a>
+            </li>
+
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/bloquearNumeros" class="text-white"
+                >Bloquear Numeros</a
+              >
+            </li>
+
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/users" class="text-white">Usuarios</a>
+            </li>
+            <li
+              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
+            >
+              <a href="/admin/adminZona" class="text-white">Admin Zonas</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full flex flex-col justify-start items-center">
+          <Logout client:load />
+        </div>
+      </section>
+
+      <section
+        class="w-full md:w-[80%] h-full overflow-y-auto overflow-hidden bg-white shadow-lg p-4"
+      >
+        <slot />
+      </section>
+    </main>
+  </body>
+
+  <style is:global>
+    :root {
+      --accent: 136, 58, 234;
+      --accent-light: 224, 204, 250;
+      --accent-dark: 49, 10, 101;
+      --accent-gradient: linear-gradient(
+        45deg,
+        rgb(var(--accent)),
+        rgb(var(--accent-light)) 30%,
+        white 60%
+      );
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    html {
+      font-family: system-ui, sans-serif;
+      background: #f4f4f4;
+      color: #111;
+    }
+    code {
+      font-family:
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace;
+    }
+  </style>
+
+
+</html>

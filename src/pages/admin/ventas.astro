@@ -1,0 +1,10 @@
+---
+import LayoutAdmin from "../../layouts/LayoutAdmin.astro";
+import Venta from "../../components/ventas";
+---
+
+<LayoutAdmin title="Ventas">
+  <main>
+    <Venta client:load />
+  </main>
+</LayoutAdmin>

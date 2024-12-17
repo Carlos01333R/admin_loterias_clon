@@ -1,0 +1,13 @@
+---
+import Home from "../../components/home";
+import LayoutAdmin from "../../layouts/LayoutAdmin.astro";
+
+// No necesitas verificar la sesión directamente en el servidor aquí,
+// ya que la redirección debería ocurrir en el lado del cliente
+---
+
+<LayoutAdmin title="Dashboard">
+  <main>
+    <Home client:load />
+  </main>
+</LayoutAdmin>
