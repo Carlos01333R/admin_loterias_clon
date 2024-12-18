@@ -129,16 +129,16 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
               {errorPremio && <p className="text-red-500">{errorPremio}</p>}
               {loadingPremio && <p>Cargando...</p>}
               {premio !== undefined &&
-                totales?.ventaNeta !== undefined &&
+                ventaNetaHoyNew !== undefined &&
                 premio !== 0 && (
                   <p
                     className={`font-bold text-lg ${
-                      totales.ventaNeta - premio < totales.ventaNeta
+                      ventaNetaHoyNew - premio < 0
                         ? "text-red-500"
                         : "text-blue-500"
                     }`}
                   >
-                    {formatPesoCop(totales.ventaNeta - premio)}
+                    {formatPesoCop(ventaNetaHoyNew - premio)}
                   </p>
                 )}
               {premio === 0 && (
