@@ -21,13 +21,11 @@ export default function WinLoterias() {
     (match) => match.match2 || match.match3 || match.match4
   );
 
-  const FormarPesoCop = (value) => {
-    return value.toLocaleString("es-CO", {
+  const FormarPesoCop = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
+      currency: "EUR",
+    }).format(amount);
   };
 
   // Función para agrupar los premios por numero_venta

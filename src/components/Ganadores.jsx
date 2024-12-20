@@ -18,6 +18,13 @@ export default function GanadoresLoterias() {
     checkSession();
   }, []);
 
+  const formatSpanishEuro = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    }).format(amount);
+  };
+
   return (
     <>
       {error && <p>{error.message || "Ocurrió un error"}</p>}
@@ -89,10 +96,7 @@ export default function GanadoresLoterias() {
                       <td className="border px-4 py-2">{match.hora}</td>
                       <td className="border px-4 py-2">{match.zona}</td>
                       <td className="border px-4 py-2">
-                        {new Intl.NumberFormat("es-CO", {
-                          style: "currency",
-                          currency: "COP",
-                        }).format(match.premio)}
+                        {formatSpanishEuro(match.premio)}
                       </td>
                       <td className="border px-4 py-2">
                         <a

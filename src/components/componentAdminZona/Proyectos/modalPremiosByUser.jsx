@@ -21,11 +21,11 @@ export default function ModalPremiosByUser({
     email
   );
 
-  const formatPesos = (value) => {
-    return new Intl.NumberFormat("es-CO", {
+  const formatPesos = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
-    }).format(value);
+      currency: "EUR",
+    }).format(amount);
   };
 
   return (

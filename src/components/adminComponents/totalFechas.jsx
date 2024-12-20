@@ -11,6 +11,8 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
     hasta,
     zona
   );
+
+  console.log(desde, hasta, zona);
   const {
     premio,
     loading: loadingPremio,
@@ -37,18 +39,12 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const formatPesoCop = (value) => {
-    if (value == null || isNaN(value)) {
-      return "N/A"; // Retorna un valor por defecto si es nulo o no es un número
-    }
-    return value.toLocaleString("es-CO", {
+  const formatPesoCop = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
+      currency: "EUR",
+    }).format(amount);
   };
-
   const handleOpenModal = () => {
     onOpen(); // Abrir el modal
   };

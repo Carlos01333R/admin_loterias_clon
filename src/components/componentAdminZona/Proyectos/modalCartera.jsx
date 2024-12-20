@@ -59,15 +59,15 @@ export default function ModalCartera({ isOpen, onOpenChange, email, sector }) {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
-      timeZone: "UTC",
+      timeZone: "Europe/Madrid", // Asegura que uses la zona horaria correcta
     };
     return date.toLocaleDateString("es-ES", options);
   };
 
   const FormatPesoCOP = (amount) => {
-    return new Intl.NumberFormat("es-CO", {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
+      currency: "EUR",
     }).format(amount);
   };
 

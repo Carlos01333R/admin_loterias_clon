@@ -45,9 +45,9 @@ export default function Venta() {
   };
 
   const formatColombianPesos = (amount) => {
-    return new Intl.NumberFormat("es-CO", {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
+      currency: "EUR",
     }).format(amount);
   };
 

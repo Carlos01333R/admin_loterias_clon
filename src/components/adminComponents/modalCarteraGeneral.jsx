@@ -26,7 +26,6 @@ export default function ModalCarteraGeneral({ isOpen, onOpenChange, zona }) {
     loading: loadingPremio,
     error: errorPremio,
   } = useTotalPremioPorZona(zona);
-  console.log(totalPremio);
 
   const { zonas } = useZonas();
   const adminZona = zonas
@@ -54,17 +53,17 @@ export default function ModalCarteraGeneral({ isOpen, onOpenChange, zona }) {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
-      timeZone: "UTC",
+      timeZone: "Europe/Madrid", // Asegura que uses la zona horaria correcta
     };
     return date.toLocaleDateString("es-ES", options);
   };
+  // Función para formatear números a euros
 
-  // Función para formatear números a pesos colombianos
-  const formatPesos = (value) => {
-    return new Intl.NumberFormat("es-CO", {
+  const formatPesos = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
-    }).format(value);
+      currency: "EUR",
+    }).format(amount);
   };
 
   return (

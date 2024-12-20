@@ -43,15 +43,12 @@ export default function VentasTotales() {
   const Ganancias = data?.[0]?.total_venta_neta ?? 0;
   const GananciasCliente = data?.[0]?.total_ganancias ?? 0;
 
-  const formatPesoCop = (value) => {
-    return value.toLocaleString("es-CO", {
+  const formatPesoCop = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
+      currency: "EUR",
+    }).format(amount);
   };
-
   const handleOpenModal = (zona) => {
     setSector(zona); // Establecer el correo electrónico del usuario
     onOpen(); // Abrir el modal

@@ -62,16 +62,11 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
     }
   }, [totalesPorVendedor]);
 
-  const formatPesoCop = (value) => {
-    if (value == null || isNaN(value)) {
-      return "N/A"; // Retorna un valor por defecto si es nulo o no es un número
-    }
-    return value.toLocaleString("es-CO", {
+  const formatPesoCop = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
       style: "currency",
-      currency: "COP",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
+      currency: "EUR",
+    }).format(amount);
   };
 
   const FilterNumeroTicket = (ventas) => {
