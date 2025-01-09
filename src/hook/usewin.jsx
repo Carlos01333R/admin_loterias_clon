@@ -18,17 +18,28 @@ const getCombinaciones = (numero) => {
   return permutations(numero);
 };
 
+const getCurrentFormattedDate = () => {
+  const today = new Date();
+  return today.toISOString().split("T")[0]; // Formato: YYYY-MM-DD
+};
+
 const useLoteriaComparison = () => {
   const [ventas, setVentas] = useState([]);
   const [apiResults, setApiResults] = useState([]);
   const [matches, setMatches] = useState([]);
 
-  const getCurrentFormattedDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+  const getDateRange = () => {
+    const now = new Date();
+    const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+
+    const formatDate = (date) => {
+      return date.toISOString().split("T")[0];
+    };
+
+    return {
+      startDate: formatDate(twoDaysAgo),
+      endDate: formatDate(now),
+    };
   };
 
   useEffect(() => {
@@ -42,23 +53,20 @@ const useLoteriaComparison = () => {
       if (error) {
         console.error("Error fetching ventas:", error);
       } else {
-        const currentDate = getCurrentFormattedDate();
-        const ventasHoy = data.filter((venta) => {
-          const [day, month, year] = venta.fecha.split("/");
-          const formattedDate = `${year}-${String(month).padStart(2, "0")}-${
-            day.length > 1 ? day : `0${day}`
-          }`;
-          return formattedDate === currentDate;
-        });
-        setVentas(ventasHoy);
+        setVentas(data);
+        console.log("ventas:", data);
       }
     };
 
     const fetchApiResults = async () => {
       try {
+        const { startDate, endDate } = getDateRange();
         const { data, error } = await supabase
           .from("resultados_loteria")
-          .select("lottery, result, date");
+          .select("lottery, result, date")
+          .gte("date", startDate)
+          .lte("date", endDate)
+          .order("date", { ascending: false });
 
         if (error) {
           console.error(

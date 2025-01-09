@@ -26,9 +26,8 @@ export default function Form() {
     const formData = new FormData(e.target);
     const resultado = formData.get("resultado");
     const fecha = formData.get("fecha");
-    const id = formData.get("id");
 
-    if (selectedSector == "" || resultado === "" || fecha === "" || id === "") {
+    if (selectedSector == "" || resultado === "" || fecha === "") {
       toast.error("Complete all fields");
       return;
     }
@@ -37,7 +36,6 @@ export default function Form() {
       .from("resultados_loteria")
       .insert([
         {
-          id: id,
           lottery: selectedSector,
           result: resultado,
           date: fecha,
@@ -90,12 +88,6 @@ export default function Form() {
               <ModalBody>
                 <form className="text-white " onSubmit={handleSubmit}>
                   <section className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <Input
-                      type="number"
-                      label="id"
-                      name="id"
-                      placeholder="id"
-                    />
                     <select
                       name="loteria"
                       className="text-black focus:border-primary rounded-xl text-sm "

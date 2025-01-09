@@ -19,6 +19,7 @@ import { useState } from "react";
 
 export default function TableResultados() {
   const { resultadosHoy, loading, error } = useResultadosLoteriaHoy();
+  console.log(resultadosHoy);
   const [Filter, setFilter] = useState(null);
 
   const columns = [
