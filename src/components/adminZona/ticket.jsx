@@ -20,6 +20,7 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
   console.log(fechaInicio, fechaFin);
   const [search, setSearch] = useState("");
   const [vendedores, setVendedores] = useState([]);
+
   const { ventas, loading, error, totales } = useFechaAdminZona(
     fechaInicio,
     fechaFin

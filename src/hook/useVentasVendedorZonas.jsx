@@ -1,51 +1,59 @@
-import { supabase } from "./supabaseClient";
+import { supabase } from "./supabaseClient"; // Asegúrate de tener la configuración de Supabase
 import { useState, useEffect } from "react";
 
-// Función para convertir de "d/m/yyyy" a "yyyy-mm-dd"
-const convertirFecha = (fecha) => {
-  const [dia, mes, año] = fecha.split("/");
-  return `${año}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
-};
-
-const useTotalesPorVendedorZona = (fechaInicio, fechaFin, sector) => {
-  const [totalesPorVendedor, setTotalesPorVendedor] = useState({});
+const useVentasTotales = (fechaInicio, fechaFin) => {
+  const [ventas, setVentas] = useState([]);
+  const [sector, setSector] = useState(null);
+  const [totales, setTotales] = useState({
+    valorBruta: 0,
+    ventaNeta: 0,
+    ganancias: 0,
+  });
+  const [totalesPorVendedor, setTotalesPorVendedor] = useState({}); // Estado para almacenar los totales por vendedor
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTotalesPorVendedor = async () => {
-      setLoading(true);
-      try {
-        // Traer todas las ventas
-        const { data, error } = await supabase
-          .from("ventas")
-          .select("*")
-          .eq("zona", sector);
+    // Recuperar el valor de 'userSector' de localStorage cuando se carga el componente
+    const storedSector = localStorage.getItem("userSector");
+    if (storedSector) {
+      setSector(storedSector);
+    }
+  }, []);
 
+  useEffect(() => {
+    const fetchVentas = async () => {
+      setLoading(true);
+      setError(null); // Resetear error en cada nueva llamada
+      try {
+        // Llamamos a la función RPC creada en Supabase
+        const { data, error } = await supabase.rpc("obtener_ventas_y_totales", {
+          zona_param: sector,
+          fecha_inicio: fechaInicio,
+          fecha_fin: fechaFin,
+        });
         if (error) throw error;
 
-        // Convertir fechas de entrada (formato yyyy-mm-dd)
-        const fechaInicioConvertida = convertirFecha(fechaInicio);
-        const fechaFinConvertida = convertirFecha(fechaFin);
-
-        // Filtrar las ventas por rango de fechas
-        const ventasFiltradas = data.filter((venta) => {
-          const fechaVentaConvertida = convertirFecha(venta.fecha);
-          return (
-            fechaVentaConvertida >= fechaInicioConvertida &&
-            fechaVentaConvertida <= fechaFinConvertida
-          );
+        // Asignamos los valores totales y las ventas
+        setTotales({
+          valorBruta: parseFloat(data[0].totales.total_valor_bruta) || 0,
+          ventaNeta: parseFloat(data[0].totales.total_venta_neta) || 0,
+          ganancias: parseFloat(data[0].totales.total_ganancias) || 0,
         });
 
-        // Agrupar y sumar los valores de valor_bruta, venta_neta y ganancias por vendedor
-        const totalesCalculadosPorVendedor = ventasFiltradas.reduce(
+        const ventasFiltradas = data[0].ventas;
+
+        // Agrupar y sumar los valores por vendedor
+        const totalesPorVendedorCalculados = ventasFiltradas.reduce(
           (acc, venta) => {
             const vendedor = venta.vendedor;
 
+            // Si el vendedor no está en el acumulador, inicializarlo
             if (!acc[vendedor]) {
               acc[vendedor] = { valorBruta: 0, ventaNeta: 0, ganancias: 0 };
             }
 
+            // Sumar los valores correspondientes a cada vendedor
             acc[vendedor].valorBruta += parseFloat(venta.valor_bruta) || 0;
             acc[vendedor].ventaNeta += parseFloat(venta.venta_neta) || 0;
             acc[vendedor].ganancias += parseFloat(venta.ganancias) || 0;
@@ -55,7 +63,9 @@ const useTotalesPorVendedorZona = (fechaInicio, fechaFin, sector) => {
           {}
         );
 
-        setTotalesPorVendedor(totalesCalculadosPorVendedor);
+        setTotalesPorVendedor(totalesPorVendedorCalculados); // Actualizar el estado con los totales por vendedor
+
+        setVentas(ventasFiltradas); // Establecer las ventas filtradas
       } catch (error) {
         setError(error.message);
       } finally {
@@ -63,12 +73,13 @@ const useTotalesPorVendedorZona = (fechaInicio, fechaFin, sector) => {
       }
     };
 
-    if (fechaInicio && fechaFin) {
-      fetchTotalesPorVendedor();
+    // Solo ejecutar la consulta si las fechas están definidas y el sector está establecido
+    if (fechaInicio && fechaFin && sector) {
+      fetchVentas();
     }
   }, [fechaInicio, fechaFin, sector]);
 
-  return { totalesPorVendedor, loading, error };
+  return { ventas, totales, totalesPorVendedor, loading, error };
 };
 
-export default useTotalesPorVendedorZona;
+export default useVentasTotales;

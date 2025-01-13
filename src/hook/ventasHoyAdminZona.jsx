@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "./supabaseClient";
 import useZonas from "./useZona";
 
@@ -6,27 +6,29 @@ const useVentasHoyAdminZona = ({ sector, email }) => {
   const [valorBrutaHoy, setValorBrutaHoy] = useState(0);
   const [ventaNetaHoy, setVentaNetaHoy] = useState(0);
   const [gananciasHoy, setGananciasHoy] = useState(0);
+  const [fechaActual, setFechaActual] = useState("");
   const { zonas } = useZonas();
 
   const adminZona = zonas
     ? zonas.find((z) => z.nombre === sector)?.porcentaje_admin_zona
     : null;
 
-  // Función para convertir la fecha de texto a objeto Date
-  const parseFecha = (fechaTexto) => {
-    const [dia, mes, año] = fechaTexto.split("/").map(Number);
-    return new Date(año, mes - 1, dia); // Mes es 0-indexed en JavaScript
-  };
+  const obtenerFechaActual = useCallback(() => {
+    const hoy = new Date();
+    return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`;
+  }, []);
 
-  // Función para recuperar las ventas del día actual, dependiendo del parámetro pasado
-  const fetchVentasHoy = async () => {
-    const today = new Date();
-    const fechaActual = today.setHours(0, 0, 0, 0);
+  const fetchVentasHoy = useCallback(async () => {
+    const fechaHoy = obtenerFechaActual();
 
-    // Realiza la consulta según el parámetro que se pase
+    if (fechaHoy === fechaActual) {
+      return; // No actualizar si la fecha no ha cambiado
+    }
+
     let query = supabase
       .from("ventas")
-      .select("valor_bruta, venta_neta, ganancias, fecha");
+      .select("valor_bruta, venta_neta, ganancias")
+      .eq("fecha", fechaHoy);
 
     if (sector) {
       query = query.eq("zona", sector);
@@ -40,44 +42,47 @@ const useVentasHoyAdminZona = ({ sector, email }) => {
     }
 
     const { data, error } = await query;
-    console.log(data)
 
     if (error) {
-      console.error("Error al recuperar los datos: ", error);
+      console.error("Error al recuperar los datos:", error);
       return;
     }
 
-    const totalValorBruto = data.reduce((acc, row) => {
-      const fechaVenta = parseFecha(row.fecha);
-      return fechaVenta.getTime() === fechaActual
-        ? acc + (Number(row.valor_bruta) || 0)
-        : acc;
-    }, 0);
-
-    const totalVentaNeta = data.reduce((acc, row) => {
-      const fechaVenta = parseFecha(row.fecha);
-      return fechaVenta.getTime() === fechaActual
-        ? acc + (Number(row.venta_neta) || 0)
-        : acc;
-    }, 0);
-
-    const totalGanancias = data.reduce((acc, row) => {
-      const fechaVenta = parseFecha(row.fecha);
-      return fechaVenta.getTime() === fechaActual
-        ? acc + (Number(row.ganancias) || 0)
-        : acc;
-    }, 0);
+    const totalValorBruto = data.reduce(
+      (sum, venta) => sum + (Number(venta.valor_bruta) || 0),
+      0
+    );
+    const totalVentaNeta = data.reduce(
+      (sum, venta) => sum + (Number(venta.venta_neta) || 0),
+      0
+    );
+    const totalGanancias = data.reduce(
+      (sum, venta) => sum + (Number(venta.ganancias) || 0),
+      0
+    );
 
     setValorBrutaHoy(totalValorBruto);
     setVentaNetaHoy(totalVentaNeta);
     setGananciasHoy(totalGanancias);
-  };
+    setFechaActual(fechaHoy);
+  }, [sector, email, fechaActual]);
 
   useEffect(() => {
-    fetchVentasHoy();
-  }, [sector, email]);
+    fetchVentasHoy(); // Ejecutar inmediatamente al montar el componente
 
-  return { valorBrutaHoy, ventaNetaHoy, gananciasHoy, adminZona };
+    // Configurar un intervalo para comprobar cambios de fecha cada minuto
+    const intervalo = setInterval(() => {
+      const nuevaFecha = obtenerFechaActual();
+      if (nuevaFecha !== fechaActual) {
+        fetchVentasHoy();
+      }
+    }, 60000); // 60000 ms = 1 minuto
+
+    // Limpiar el intervalo al desmontar el componente
+    return () => clearInterval(intervalo);
+  }, [fetchVentasHoy, obtenerFechaActual, fechaActual]);
+
+  return { valorBrutaHoy, ventaNetaHoy, gananciasHoy, adminZona, fechaActual };
 };
 
 export default useVentasHoyAdminZona;

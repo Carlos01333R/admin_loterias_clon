@@ -1,62 +1,38 @@
-import { supabase } from "./supabaseClient";
+import { supabase } from "./supabaseClient"; // Asegúrate de tener la configuración de Supabase
 import { useState, useEffect } from "react";
 
-// Función para convertir de "d/m/yyyy" a "yyyy-mm-dd"
-const convertirFecha = (fecha) => {
-  const [dia, mes, año] = fecha.split("/");
-  return `${año}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
-};
-
-const useVentasZonasByFecha = (fechaInicio, fechaFin, zona) => {
+const useVentasTotales = (fechaInicio, fechaFin, zona) => {
   const [ventas, setVentas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   const [totales, setTotales] = useState({
     valorBruta: 0,
     ventaNeta: 0,
     ganancias: 0,
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchVentas = async () => {
       setLoading(true);
+      setError(null); // Resetear error en cada nueva llamada
       try {
-        // Traer todas las ventas del usuario
-        const { data, error } = await supabase
-          .from("ventas")
-          .select("*")
-          .eq("zona", zona);
-
+        // Llamamos a la función RPC creada en Supabase
+        const { data, error } = await supabase.rpc("obtener_ventas_y_totales", {
+          zona_param: zona,
+          fecha_inicio: fechaInicio,
+          fecha_fin: fechaFin,
+        });
         if (error) throw error;
 
-        // Convertir fechas de entrada (formato yyyy-mm-dd)
-        const fechaInicioConvertida = convertirFecha(fechaInicio);
-        const fechaFinConvertida = convertirFecha(fechaFin);
-
-        console.log(fechaInicioConvertida, fechaFinConvertida);
-
-        // Filtrar las ventas por rango de fechas
-        const ventasFiltradas = data.filter((venta) => {
-          const fechaVentaConvertida = convertirFecha(venta.fecha); // Convertir fecha de la venta al mismo formato
-          return (
-            fechaVentaConvertida >= fechaInicioConvertida &&
-            fechaVentaConvertida <= fechaFinConvertida
-          );
+        // Asignamos los valores totales y las ventas
+        setTotales({
+          valorBruta: parseFloat(data[0].totales.total_valor_bruta) || 0,
+          ventaNeta: parseFloat(data[0].totales.total_venta_neta) || 0,
+          ganancias: parseFloat(data[0].totales.total_ganancias) || 0,
         });
 
-        // Sumar los valores de valor_bruta, venta_neta y ganancias
-        const totalesCalculados = ventasFiltradas.reduce(
-          (acc, venta) => {
-            acc.valorBruta += parseFloat(venta.valor_bruta) || 0;
-            acc.ventaNeta += parseFloat(venta.venta_neta) || 0;
-            acc.ganancias += parseFloat(venta.ganancias) || 0;
-            return acc;
-          },
-          { valorBruta: 0, ventaNeta: 0, ganancias: 0 }
-        );
-
-        setVentas(ventasFiltradas);
-        setTotales(totalesCalculados);
+        setVentas(data[0].ventas); // Establecer las ventas filtradas
       } catch (error) {
         setError(error.message);
       } finally {
@@ -64,12 +40,13 @@ const useVentasZonasByFecha = (fechaInicio, fechaFin, zona) => {
       }
     };
 
-    if (fechaInicio && fechaFin) {
+    // Solo ejecutar la consulta si las fechas están definidas
+    if (fechaInicio && fechaFin && zona) {
       fetchVentas();
     }
-  }, [fechaInicio, fechaFin]);
+  }, [fechaInicio, fechaFin, zona]);
 
-  return { ventas, loading, error, totales };
+  return { ventas, totales, loading, error };
 };
 
-export default useVentasZonasByFecha;
+export default useVentasTotales;

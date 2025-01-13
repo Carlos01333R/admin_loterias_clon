@@ -12,7 +12,6 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
     zona
   );
 
-  console.log(desde, hasta, zona);
   const {
     premio,
     loading: loadingPremio,
