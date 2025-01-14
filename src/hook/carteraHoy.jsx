@@ -1,67 +1,71 @@
-import { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient"; // Asegúrate de que este import es correcto
+import { useState, useEffect, useCallback } from "react";
+import { supabase } from "./supabaseClient";
 
 const useCarteraHoy = () => {
   const [valorBrutaHoy, setValorBrutaHoy] = useState(0);
   const [ventaNetaHoy, setVentaNetaHoy] = useState(0);
   const [gananciasHoy, setGananciasHoy] = useState(0);
+  const [fechaActual, setFechaActual] = useState("");
 
-  // Función para convertir la fecha de texto a objeto Date
-  const parseFecha = (fechaTexto) => {
-    const [dia, mes, año] = fechaTexto.split("/").map(Number);
-    return new Date(año, mes - 1, dia); // Mes es 0-indexed en JavaScript
-  };
-
-  // Función para recuperar las ventas del día actual
-  const fetchSector = async () => {
-    const today = new Date();
-    const fechaActual = today.setHours(0, 0, 0, 0);
-
-    const { data, error } = await supabase
-      .from("ventas")
-      .select("valor_bruta, venta_neta, ganancias, fecha"); // Asegúrate de que la columna 'fecha' existe
-
-    if (error) {
-      console.error("Error fetching sector: ", error);
-    } else if (data) {
-      const totalValorBruto = data.reduce((acc, row) => {
-        const fechaVenta = parseFecha(row.fecha);
-        if (fechaVenta.getTime() === fechaActual) {
-          // Comparar solo si es el día actual
-          return acc + (Number(row.valor_bruta) || 0);
-        }
-        return acc;
-      }, 0);
-
-      const totalVentaNeta = data.reduce((acc, row) => {
-        const fechaVenta = parseFecha(row.fecha);
-        if (fechaVenta.getTime() === fechaActual) {
-          return acc + (Number(row.venta_neta) || 0);
-        }
-        return acc;
-      }, 0);
-
-      const totalGanancias = data.reduce((acc, row) => {
-        const fechaVenta = parseFecha(row.fecha);
-        if (fechaVenta.getTime() === fechaActual) {
-          return acc + (Number(row.ganancias) || 0);
-        }
-        return acc;
-      }, 0);
-
-      setValorBrutaHoy(totalValorBruto);
-      setVentaNetaHoy(totalVentaNeta);
-      setGananciasHoy(totalGanancias);
-    } else {
-      console.error("No sector found for this email");
-    }
-  };
-
-  useEffect(() => {
-    fetchSector();
+  const obtenerFechaActual = useCallback(() => {
+    const hoy = new Date();
+    return `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()}`;
   }, []);
 
-  return { valorBrutaHoy, ventaNetaHoy, gananciasHoy };
+  const fetchVentasHoy = useCallback(async () => {
+    const fechaHoy = obtenerFechaActual();
+
+    if (fechaHoy === fechaActual) {
+      return; // No actualizar si la fecha no ha cambiado
+    }
+
+    let query = supabase
+      .from("ventas")
+      .select("valor_bruta, venta_neta, ganancias")
+      .eq("fecha", fechaHoy);
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error("Error al recuperar los datos:", error);
+      return;
+    }
+
+    const totalValorBruto = data.reduce(
+      (sum, venta) => sum + (Number(venta.valor_bruta) || 0),
+      0
+    );
+    const totalVentaNeta = data.reduce(
+      (sum, venta) => sum + (Number(venta.venta_neta) || 0),
+      0
+    );
+    const totalGanancias = data.reduce(
+      (sum, venta) => sum + (Number(venta.ganancias) || 0),
+      0
+    );
+
+    setValorBrutaHoy(totalValorBruto);
+    setVentaNetaHoy(totalVentaNeta);
+    setGananciasHoy(totalGanancias);
+    setFechaActual(fechaHoy);
+  }, [fechaActual]);
+
+  useEffect(() => {
+    fetchVentasHoy(); // Ejecutar inmediatamente al montar el componente
+
+    // Configurar un intervalo para comprobar cambios de fecha cada minuto
+    const intervalo = setInterval(() => {
+      const nuevaFecha = obtenerFechaActual();
+      if (nuevaFecha !== fechaActual) {
+        fetchVentasHoy();
+      }
+    }, 60000); // 60000 ms = 1 minuto
+
+    // Limpiar el intervalo al desmontar el componente
+    return () => clearInterval(intervalo);
+  }, [fetchVentasHoy, obtenerFechaActual, fechaActual]);
+
+  return { valorBrutaHoy, ventaNetaHoy, gananciasHoy, fechaActual };
 };
 
 export default useCarteraHoy;

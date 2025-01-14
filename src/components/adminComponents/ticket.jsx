@@ -18,7 +18,6 @@ import IconName from "../../icons/IconName";
 import * as XLSX from "xlsx";
 
 export default function Ticket({ fechaInicio, fechaFin }) {
-  console.log(fechaInicio, fechaFin);
   const [search, setSearch] = useState("");
   const { ventas, loading, error, totales } = useVentasByFecha(
     fechaInicio,

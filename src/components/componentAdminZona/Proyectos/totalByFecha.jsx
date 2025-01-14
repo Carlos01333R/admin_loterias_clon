@@ -32,9 +32,11 @@ export default function TotalByFechas({ desde, hasta, email, sector }) {
     ? zonas.find((z) => z.nombre === sector)?.porcentaje_cliente
     : null;
 
-  const ventaNetaHoyNew = (totales?.valorBruta * adminZonaVentaNeta) / 100;
-  const gananciasHoyNew = (totales?.valorBruta * adminZonaGanancias) / 100;
-  const gananciasAdminZonaNew = (totales?.valorBruta * adminZona) / 100;
+  const ventaNetaHoyNew =
+    (totales?.total_valor_bruta * adminZonaVentaNeta) / 100;
+  const gananciasHoyNew =
+    (totales?.total_valor_bruta * adminZonaGanancias) / 100;
+  const gananciasAdminZonaNew = (totales?.total_valor_bruta * adminZona) / 100;
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -68,7 +70,7 @@ export default function TotalByFechas({ desde, hasta, email, sector }) {
                 <p className="text-sm font-bold text-zinc-900">Venta Bruta</p>
               </div>
               <p className="font-bold text-lg text-zinc-900">
-                {formatPesoCop(totales?.valorBruta)}
+                {formatPesoCop(totales?.total_valor_bruta)}
               </p>
             </div>
             <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
