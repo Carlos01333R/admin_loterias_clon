@@ -32,12 +32,11 @@ export default function HeaderAdminZona() {
   return (
     <>
       <header className="w-full flex  justify-end  items-center ">
-        <section className="md:hidden p-0 w-[60%] flex justify-end  text-[#0064FF] items-center transition-all duration-300 ease-in-out rounded-l-xl ">
+        <section className="md:hidden p-0 w-[60%] flex justify-end  text-black items-center transition-all duration-300 ease-in-out rounded-l-xl bg-white">
           {showHeader ? (
-            <div className="relative flex flex-col items-center">
-              <img src="/Shapedividers.svg" alt="" className="w-full h-12" />
+            <div className=" flex flex-col items-center">
               <button
-                className="px-2 py-1 absolute top-3 right-0 mt-2 mr-2 bg-white text-[#0064FF] rounded-full"
+                className="px-2 py-1 mt-2 mr-2 bg-white text-black rounded-full"
                 onClick={() => setShowHeader(!showHeader)}
               >
                 {CloseIcon()}
@@ -57,7 +56,7 @@ export default function HeaderAdminZona() {
       {showHeader && (
         <>
           <div className="w-full absolute h-screen flex justify-end items-end z-10 transition-all duration-300 ease-in-out">
-            <section className="w-[60%] bg-[#0064FF] h-screen transition-all duration-300 ease-in-out rounded-l-xl">
+            <section className="w-[60%] bg-black h-screen transition-all duration-300 ease-in-out rounded-l-xl">
               <LogoutAdminZona client:load />
               <div class="w-full flex flex-col justify-start items-center ">
                 <ul class="w-full list-none p-4 text-white flex flex-col gap-y-2 ">
@@ -66,7 +65,7 @@ export default function HeaderAdminZona() {
                       key={item.name}
                       class="w-full bg-white text-[#0064FF] mb-2 rounded-xl py-2 flex justify-center items-center hover:bg-slate-100"
                     >
-                      <div className="flex items-center text-[#0064FF] gap-x-2">
+                      <div className="flex items-center text-black gap-x-2">
                         <img src={item.logo} alt={item.name} class="w-6 h-6" />
                         {item.component || <a href={item.href}>{item.name}</a>}
                       </div>
