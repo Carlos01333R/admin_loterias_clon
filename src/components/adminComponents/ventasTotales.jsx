@@ -31,7 +31,6 @@ export default function VentasTotales() {
     loading: loadingVentas,
     error: errorVentas,
   } = useVentasGeneralesHoy();
-  console.log(ventas);
 
   const {
     adminZona,
@@ -58,118 +57,160 @@ export default function VentasTotales() {
     return <p>Cargando...</p>;
   }
 
+  const items = [
+    {
+      name: "Venta Bruta",
+      subName: "Venta Bruta general",
+      value: formatPesoCop(VentaBruta),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+    {
+      name: "Venta Neta",
+      subName: "Venta Neta general",
+      value: formatPesoCop(Ganancias),
+      logo: "https://images.vexels.com/media/users/3/147974/isolated/preview/22ed2b8524101426e7b490c95097a8f2-icono-de-ventas-comerciales.png",
+    },
+    {
+      name: "Ganancias Clientes",
+      subName: "Ganancias Clientes general",
+      value: formatPesoCop(GananciasCliente),
+      logo: "https://cdn-icons-png.freepik.com/512/10997/10997932.png",
+    },
+  ];
+
   return (
     <>
-      <h2 className="text-2xl font-bold text-center text-zinc-900 mt-3 underline">
-        Ventas Totales
-      </h2>
       {error && <p className="text-red-500">{error.message}</p>}
-      <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-0">
-        <div className="border-2 border-zinc-200 rounded-lg p-4  h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-sm font-bold text-zinc-900">Venta Bruta</p>
-          </div>
-          <p className="font-bold text-zinc-900 text-xl">
-            {formatPesoCop(VentaBruta)}
-          </p>
-        </div>
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-sm font-bold text-zinc-900">Venta Neta</p>
-          </div>
-          <p className="font-bold text-zinc-900 text-xl">
-            {formatPesoCop(Ganancias)}
-          </p>
-        </div>
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-sm font-bold text-zinc-900">
-              Ganancias Clientes
-            </p>
-          </div>
-          <p className="font-bold text-zinc-900 text-xl">
-            {formatPesoCop(GananciasCliente)}
-          </p>
-        </div>
+      <section className="w-full px-4 flex justify-center md:justify-end   text-orange-400 mt-5 md:mt-0">
+        <p
+          className="text-black flex gap-x-2 items-center
+        px-4 py-2 text-2xl  font-extrabold bg-white rounded-xl shadow-xl "
+        >
+          <img className="h-8" src="/sale.png" alt="" />
+          Ventas
+        </p>
       </section>
 
-      <section className="mt-3 w-full flex flex-col justify-center items-center ">
-        <h2 className="text-2xl font-bold text-center text-zinc-900 mt-3 underline">
-          Sectores de Ventas
-        </h2>
+      <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5  gap-y-2 md:gap-y-0">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="w-full flex  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-xl"
+          >
+            <div className="flex flex-col w-[70%] px-6">
+              <p className="text-lg font-bold text-zinc-900">{item.name}</p>
+              <p className="font-extrabold text-[#3DB078] text-3xl truncate">
+                {item.value}
+              </p>
+              <small className="text-xs-small text-[#F5BE40]">
+                {item.subName}
+              </small>
+            </div>
+            <div className="w-[30%]">
+              <img src={item.logo} alt="ventas" className="h-16" />
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section className="mt-3 w-full p-4 flex flex-col justify-center items-center">
+        <div className="w-full flex justify-center md:justify-end mb-5 ">
+          <p className="text-2xl flex gap-x-2 font-bold  mt-3 text-black bg-white px-4 py-2 rounded-xl shadow-xl">
+            <img
+              src="https://cdn.icon-icons.com/icons2/919/PNG/512/piechart_icon-icons.com_71902.png"
+              alt="sectores"
+              className="h-8"
+            />
+            Sectores
+          </p>
+        </div>
 
         {errorZonas && <p className="text-red-500">{errorZonas.message}</p>}
         {loadingZonas ? (
-          <p>Cargando...</p>
+          <p className="text-orange-400">Cargando...</p>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "10px",
-              width: "100%",
-              padding: "10px",
-            }}
-          >
-            {zonas.map((zona, index) => {
-              return (
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {zonas.map((zona, index) => (
                 <button
                   onClick={() => handleOpenModal(zona.nombre)}
                   key={index}
-                  className="w-auto h-auto bg-zinc-100 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-end items-center hover:scale-105 transition-all duration-300 rounded-xl mt-3 "
+                  className={`
+                bg-white  rounded-xl p-3 shadow-xl focus:outline-none
+                ${index === 0 ? "md:col-span-1 md:row-span-2" : ""}
+                transition duration-300 ease-in-out transform hover:scale-105
+              `}
                 >
-                  <img
-                    src="https://trayectoriasenviaje.com/wp-content/uploads/2022/05/que-hacer-cartagena-entrada_ciudad_amurallada.jpg"
-                    alt="zona"
-                    className="rounded-t-xl"
-                  />
-                  <p className="text-lg font-bold text-zinc-900 p-3 ">
-                    {zona.nombre}
-                  </p>
+                  <div className="relative w-full h-full">
+                    <img
+                      src="https://static.comunicae.com/photos/notas/1161993/Barcelona.jpg"
+                      alt="zona"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                    <p
+                      className="
+                    absolute inset-0 flex justify-center items-center 
+                    text-white font-bold bg-black bg-opacity-70
+                    rounded-lg text-2xl
+                  "
+                    >
+                      <p className="bg-white px-2 py-1 rounded-lg text-black">
+                        {zona.nombre}
+                      </p>
+                    </p>
+                  </div>
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </div>
         )}
       </section>
 
       <section className="w-full flex flex-col justify-center items-center ">
-        <h2 className="text-2xl font-bold text-center text-zinc-900 mt-3 underline">
-          Administradores de Zona
-        </h2>
+        <section className="w-full px-4 flex justify-center md:justify-end   text-orange-400">
+          <p
+            className="text-black flex gap-x-2 items-center
+        px-4 py-2 text-2xl  font-extrabold bg-white rounded-xl shadow-xl "
+          >
+            <img
+              className="h-8"
+              src="https://cdn-icons-png.flaticon.com/512/8443/8443122.png"
+              alt=""
+            />
+            Administradores
+          </p>
+        </section>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "10px",
-            width: "100%",
-            padding: "10px",
-          }}
-        >
-          {adminZona.map((zona, index) => {
-            return (
-              <>
-                <article
-                  key={index}
-                  className="w-auto h-auto bg-white  flex flex-col justify-end shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] items-center hover:scale-105 transition-all duration-300 rounded-xl mt-3 "
-                >
+        <div className="container mx-auto p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {adminZona.map((zona, index) => (
+              <article
+                key={index}
+                className={`
+          bg-white rounded-lg shadow-md p-6 
+          ${index === 0 ? "md:col-span-1 md:row-span-2" : ""}
+          transition duration-300 ease-in-out transform hover:scale-105
+        `}
+              >
+                <div className="relative w-full h-48">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/512/10061/10061684.png"
+                    src="https://cms.usanmarcos.ac.cr/sites/default/files/2024-06/areas-de-trabajo-de-un-administrador-de-empresas.png"
                     alt="admin"
-                    className="rounded-t-xl w-10 h-10"
+                    className="w-full h-full object-cover rounded-lg"
                   />
-                  <p className="text-lg font-bold text-zinc-900 ">
-                    {zona.nombre}
-                  </p>
-                  <small>Admin {zona.sector}</small>
-                </article>
-              </>
-            );
-          })}
+                  <div
+                    className="
+              absolute inset-0 flex flex-col justify-center items-center 
+              bg-black bg-opacity-70 text-white text-center p-3
+            "
+                  >
+                    <p className="text-lg font-bold">{zona.nombre}</p>
+                    <small className="text-sm">Admin {zona.sector}</small>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <ModalCarteraGeneral

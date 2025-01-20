@@ -2,13 +2,21 @@ import { useEffect } from "react";
 import { supabase } from "../hook/supabaseClient";
 import useGanadores from "../hook/ganadores";
 import { Toaster } from "sonner";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
 
 export default function GanadoresLoterias() {
   const { ganadores, loading, error } = useGanadores();
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
+      const { data } = await supabase.auth.getSession();
 
       if (!data.session) {
         window.location.href = "/";
@@ -25,6 +33,22 @@ export default function GanadoresLoterias() {
     }).format(amount);
   };
 
+  const columns = [
+    { name: "LOTERIA" },
+    { name: "BOLETO" },
+    { name: "RESULTADO" },
+    { name: "COINCIDENCIA 2" },
+    { name: "COINCIDENCIA 3" },
+    { name: "COINCIDENCIA 4" },
+    { name: "NOMBRE" },
+    { name: "CELULAR" },
+    { name: "FECHA" },
+    { name: "HORA" },
+    { name: "ZONA" },
+    { name: "PREMIO" },
+    { name: "TICKET" },
+  ];
+
   return (
     <>
       {error && <p>{error.message || "Ocurrió un error"}</p>}
@@ -35,70 +59,63 @@ export default function GanadoresLoterias() {
         </h2>
       ) : (
         <>
-          <section className="w-full flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-zinc-900 mt-5 mb-10">
-              Historial de Ganadores{" "}
+          <section className="w-full flex justify-end items-center ">
+            <h2 className="text-2xl font-bold mt-5 mb-10 flex items-center gap-x-2 mr-10 ">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/9913/9913579.png"
+                alt="loteria"
+                className="w-8 h-8"
+              />
+              Historial de Ganadores
             </h2>
           </section>
-
-          {ganadores && ganadores.length === 0 ? (
-            <p>No se encontraron ganadores.</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border-collapse border border-gray-200">
-                <thead>
-                  <tr>
-                    <th className="px-4 py-2 border border-gray-300">
-                      Lotería
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">Boleto</th>
-                    <th className="px-4 py-2 border border-gray-300">
-                      Resultado
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">
-                      Coincidencia 2
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">
-                      Coincidencia 3
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">
-                      Coincidencia 4
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">Nombre</th>
-                    <th className="px-4 py-2 border border-gray-300">
-                      Celular
-                    </th>
-                    <th className="px-4 py-2 border border-gray-300">Fecha</th>
-                    <th className="px-4 py-2 border border-gray-300">Hora</th>
-                    <th className="px-4 py-2 border border-gray-300">Zona</th>
-                    <th className="px-4 py-2 border border-gray-300">Premio</th>
-                    <th className="px-4 py-2 border border-gray-300">Ticket</th>
-                  </tr>
-                </thead>
-                <tbody>
+          <div className="p-4  ">
+            {ganadores && ganadores.length === 0 ? (
+              <p>No se encontraron ganadores.</p>
+            ) : (
+              <Table
+                style={{
+                  backgroundColor: "#000000",
+                }}
+                isStriped
+                aria-label="Tabla de ganadores"
+                className=" text-white"
+              >
+                <TableHeader>
+                  {columns.map((col, index) => (
+                    <TableColumn
+                      style={{
+                        backgroundColor: "#000000",
+                      }}
+                      className="text-white shadow-2xl border-b-2 border-white rounded-xl"
+                      key={index}
+                    >
+                      <p className="flex items-center gap-2 ">{col.name}</p>
+                    </TableColumn>
+                  ))}
+                </TableHeader>
+                <TableBody>
                   {ganadores.map((match, index) => (
-                    <tr key={index}>
-                      <td className="border px-4 py-2">{match.lottery}</td>
-                      <td className="border px-4 py-2">{match.boleto}</td>
-                      <td className="border px-4 py-2">{match.result}</td>
-                      <td className="border px-4 py-2">
+                    <TableRow key={index}>
+                      <TableCell>{match.lottery}</TableCell>
+                      <TableCell>{match.boleto}</TableCell>
+                      <TableCell>{match.result}</TableCell>
+                      <TableCell>
                         {match.match2 === "true" ? "✔️" : "❌"}
-                      </td>
-                      <td className="border px-4 py-2">
+                      </TableCell>
+                      <TableCell>
                         {match.match3 === "true" ? "✔️" : "❌"}
-                      </td>
-                      <td className="border px-4 py-2">
+                      </TableCell>
+                      <TableCell>
                         {match.match4 === "true" ? "✔️" : "❌"}
-                      </td>
-                      <td className="border px-4 py-2">{match.nombre}</td>
-                      <td className="border px-4 py-2">{match.celular}</td>
-                      <td className="border px-4 py-2">{match.fecha}</td>
-                      <td className="border px-4 py-2">{match.hora}</td>
-                      <td className="border px-4 py-2">{match.zona}</td>
-                      <td className="border px-4 py-2">
-                        {formatSpanishEuro(match.premio)}
-                      </td>
-                      <td className="border px-4 py-2">
+                      </TableCell>
+                      <TableCell>{match.nombre}</TableCell>
+                      <TableCell>{match.celular}</TableCell>
+                      <TableCell>{match.fecha}</TableCell>
+                      <TableCell>{match.hora}</TableCell>
+                      <TableCell>{match.zona}</TableCell>
+                      <TableCell>{formatSpanishEuro(match.premio)}</TableCell>
+                      <TableCell>
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
@@ -107,13 +124,13 @@ export default function GanadoresLoterias() {
                         >
                           {match.numero_venta}
                         </a>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                </TableBody>
+              </Table>
+            )}
+          </div>
         </>
       )}
       <Toaster />

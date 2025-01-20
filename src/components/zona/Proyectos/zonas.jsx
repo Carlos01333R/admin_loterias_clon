@@ -6,18 +6,21 @@ export default function ZonasComponent() {
 
   return (
     <>
-      <section className="w-full mx-auto flex flex-col justify-center items-center">
-        <div className="flex flex-col ml-5 items-start">
-          <h2 className="font-raleway-black text-4xl flex justify-start items-start mb-1">
-            Editar zonas
-          </h2>
-          <p className="w-[90%] md:w-[50%] flex justify-center items-center">
-            En esta sección podrás editar las zona, Agregar mas o eliminar y
-            colocar porcentajes de ventas a cada sector. Estos cambios se
-            guardarán en la base de datos.
-          </p>
-        </div>
-      </section>
+      <div className="w-full flex flex-col items-end ml-5 ">
+        <p className="font-raleway-black mb-1 mr-10 text-2xl flex items-center  gap-x-2 font-extrabold">
+          <img
+            src="https://cdn.icon-icons.com/icons2/919/PNG/512/piechart_icon-icons.com_71902.png"
+            alt="loteria"
+            className="w-8 h-8"
+          />
+          Editar zonas
+        </p>
+        <p className="w-[30%] mr-4 text-sm">
+          En esta sección podrás editar las zona, Agregar mas o eliminar y
+          colocar porcentajes de ventas a cada sector. Estos cambios se
+          guardarán en la base de datos.
+        </p>
+      </div>
 
       <TableZona />
       <Toaster

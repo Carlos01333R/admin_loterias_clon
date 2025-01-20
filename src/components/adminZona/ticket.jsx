@@ -176,6 +176,33 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
     { name: "BALANCE", icon: IconDescription }, // Nueva columna para los premios
   ];
 
+  const itemsFecha = [
+    {
+      name: "Venta Bruta",
+      subName: "Venta Bruta general",
+      value: formatPesoCop(totales?.valorBruta),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+    {
+      name: "Venta Neta",
+      subName: "Venta Neta general",
+      value: formatPesoCop(ventaNetaHoyNew),
+      logo: "https://images.vexels.com/media/users/3/147974/isolated/preview/22ed2b8524101426e7b490c95097a8f2-icono-de-ventas-comerciales.png",
+    },
+    {
+      name: "Ganancias usuario",
+      subName: "Ganancias usuario general",
+      value: formatPesoCop(gananciasHoyNew),
+      logo: "https://cdn-icons-png.freepik.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias admin zona",
+      subName: "Ganancias admin general",
+      value: formatPesoCop(gananciasAdminZonaNew),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+  ];
+
   if (loading) {
     return <p className="text-center text-zinc-900 font-bold">Cargando...</p>;
   }
@@ -185,46 +212,26 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
   }
   return (
     <>
-      <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-0">
-        <div className="border-2 border-zinc-200 rounded-lg p-4  h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">Venta Bruta</p>
+      <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5  gap-y-2 md:gap-y-2">
+        {itemsFecha.map((item, index) => (
+          <div
+            key={index}
+            className="w-full flex  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-xl"
+          >
+            <div className="flex flex-col w-[70%] px-6">
+              <p className="text-lg font-bold text-zinc-900">{item.name}</p>
+              <p className="font-extrabold text-[#3DB078] text-3xl truncate">
+                {item.value}
+              </p>
+              <small className="text-xs-small text-[#F5BE40]">
+                {item.subName}
+              </small>
+            </div>
+            <div className="w-[30%]">
+              <img src={item.logo} alt="ventas" className="h-16" />
+            </div>
           </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(totales?.valorBruta)}
-          </p>
-        </div>
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">Venta Neta</p>
-          </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(ventaNetaHoyNew)}
-          </p>
-        </div>
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">Ganancias usuario</p>
-          </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(gananciasHoyNew)}
-          </p>
-        </div>
-
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">
-              Ganancias admin zona
-            </p>
-          </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(gananciasAdminZonaNew)}
-          </p>
-        </div>
+        ))}
       </section>
 
       <div className="flex justify-end mb-4 w-full px-4 mt-2 ">
@@ -235,9 +242,10 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
           Descargar en Excel
         </button>
       </div>
+
       <Table
         style={{
-          backgroundColor: "#13151a",
+          backgroundColor: "#000000",
         }}
         isStriped
         className="text-white rounded-xl w-full md:max-w-[1200px] mx-auto p-0 m-0"
@@ -247,7 +255,7 @@ export default function Ticket({ fechaInicio, fechaFin, sector }) {
           {columns.map((col, index) => (
             <TableColumn
               style={{
-                backgroundColor: "#13151a",
+                backgroundColor: "#000000",
               }}
               className="text-white shadow-2xl border-b-2 border-white rounded-xl"
               key={index}

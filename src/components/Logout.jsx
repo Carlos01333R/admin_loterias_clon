@@ -1,10 +1,41 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../hook/supabaseClient";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
+
+function DropdownComponent({ name, handleLogout }) {
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <button className="h-8 w-8 rounded-full bg-white text-[#0064FF] flex justify-center items-center  focus:outline-none">
+          <img src="/arrow-badge-down.svg" alt="" />
+        </button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label="Static Actions">
+        <DropdownItem key="new">
+          <p className="font-bold text-sm truncate text-[#F5BE40]">{name}</p>
+        </DropdownItem>
+        <DropdownItem key="new">
+          <button
+            onClick={handleLogout}
+            className="bg-white  w-full text-black rounded-full px-4 py-2"
+          >
+            Cerrar sesión
+          </button>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+}
 
 export default function Logout() {
   const [userName, setUserName] = useState("");
 
-  // Obtener el usuario actual
   useEffect(() => {
     const getUserInfo = async () => {
       const {
@@ -13,8 +44,8 @@ export default function Logout() {
       } = await supabase.auth.getSession();
 
       if (session) {
-        const user = session.user; // Obtener el usuario
-        setUserName(user.email); // Establecer el nombre de usuario o el email
+        const user = session.user;
+        setUserName(user.email);
       } else if (error) {
         console.error("Error fetching session: ", error);
       }
@@ -24,26 +55,21 @@ export default function Logout() {
   }, []);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut(); // Cierra la sesión
-    window.location.href = "/"; // Redirige al login después de cerrar sesión
+    await supabase.auth.signOut();
+    window.location.href = "/";
   };
 
   return (
-    <div className="flex flex-col items-center justify-center ">
-      <p className="text-white text-lg font-bold">Bienvenido</p>{" "}
-      <img
-        src="https://as1.ftcdn.net/v2/jpg/05/90/59/88/1000_F_590598870_TOcGd4cUZzPoEMlxSc7XYwcupHOE0vLM.jpg"
-        alt="Logo"
-        className="w-10 h-10 rounded-full"
-      />
-      <p className="text-white text-xs">{userName || "Usuario"}</p>{" "}
-      {/* Muestra el nombre de usuario */}
-      <button
-        onClick={handleLogout}
-        className="bg-white text-zinc-900 py-1 px-2 rounded-xl font-semibold hover:bg-zinc-900 hover:text-white hover:border-2 transition-all duration-300 mt-2"
-      >
-        Cerrar sesión
-      </button>
+    <div className="w-full flex flex-col items-center justify-center ">
+      <section className="flex flex-col items-center justify-center py-2 gap-y-2 mt-10">
+        <img
+          src="https://as1.ftcdn.net/v2/jpg/05/90/59/88/1000_F_590598870_TOcGd4cUZzPoEMlxSc7XYwcupHOE0vLM.jpg"
+          alt="Logo"
+          className="w-14 h-14 rounded-full"
+        />
+        <p className="text-white">Admin general</p>
+        <DropdownComponent name={userName} handleLogout={handleLogout} />
+      </section>
     </div>
   );
 }

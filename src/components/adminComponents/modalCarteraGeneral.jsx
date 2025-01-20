@@ -66,6 +66,45 @@ export default function ModalCarteraGeneral({ isOpen, onOpenChange, zona }) {
     }).format(amount);
   };
 
+  const itemsHoy = [
+    {
+      name: "Venta Bruta",
+      subName: "Venta Bruta general",
+      value: formatPesos(valorBrutaHoy),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+    {
+      name: "Venta Neta",
+      subName: "Venta Neta general",
+      value: formatPesos(ventaNetaHoyNew),
+      logo: "https://images.vexels.com/media/users/3/147974/isolated/preview/22ed2b8524101426e7b490c95097a8f2-icono-de-ventas-comerciales.png",
+    },
+    {
+      name: "premios",
+      subName: "premios general",
+      value: formatPesos(totalPremio),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias Admin zona",
+      subName: "Ganancias admin general",
+      value: formatPesos(gananciasAdminZonaNew),
+      logo: "https://cdn-icons-png.freepik.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias usuarios",
+      subName: "Ganancias usuarios general",
+      value: formatPesos(gananciasHoyNew),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: "balance",
+      subName: "balance general",
+      value: formatPesos(ventaNetaHoyNew - totalPremio),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+  ];
+
   return (
     <>
       <Modal
@@ -73,6 +112,8 @@ export default function ModalCarteraGeneral({ isOpen, onOpenChange, zona }) {
         scrollBehavior="inside"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        backdrop="blur"
+        className="bg-[#F4F6FA]"
       >
         <ModalContent>
           {(onClose) => (
@@ -87,156 +128,133 @@ export default function ModalCarteraGeneral({ isOpen, onOpenChange, zona }) {
                 {/* Mostramos los resultados si hay datos */}
                 {data && data.length > 0 ? (
                   <>
-                    <h5 className="text-center font-bold">
-                      Totales de Ventas para la Zona {zona}
-                    </h5>
-                    <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-0">
-                      <div className="border-2 border-zinc-200 rounded-lg p-4  h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Venta Bruta
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
+                    <section className="w-full flex justify-center items-center ">
+                      <p className="text-center font-bold flex items-center text-lg">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/5305/5305244.png"
+                          alt=""
+                          className="w-8 h-8"
+                        />
+                        Totales de Ventas para la Zona {zona}
+                      </p>
+                    </section>
+
+                    <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5  gap-y-2 md:gap-y-2">
+                      <div className="w-full flex flex-col justify-center items-center  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]">
+                        <p className="text-lg font-bold text-zinc-900 truncate">
+                          Venta bruta
+                        </p>
+                        <p className="font-extrabold text-[#3DB078] text-2xl truncate">
                           {formatPesos(data[0].total_valor_bruta || 0)}
                         </p>
+                        <small className="text-xs-small text-[#F5BE40]">
+                          Venta Bruta general
+                        </small>
                       </div>
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Venta Neta
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
+                      <div className="w-full flex flex-col justify-center items-center  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]">
+                        <p className="text-lg font-bold text-zinc-900 truncate">
+                          Venta Neta
+                        </p>
+                        <p className="font-extrabold text-[#3DB078] text-2xl truncate">
                           {formatPesos(
                             (data[0].total_valor_bruta * adminZonaVentaNeta) /
                               100 || 0
                           )}
                         </p>
+                        <small className="text-xs-small text-[#F5BE40]">
+                          Venta Neta general
+                        </small>
                       </div>
-
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900 truncate">
-                            Ganancias Admin zona
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
+                      <div className="w-full flex flex-col justify-center items-center  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]">
+                        <p className="text-lg font-bold text-zinc-900 truncate">
+                          Ganancias Admin zona
+                        </p>
+                        <p className="font-extrabold text-[#3DB078] text-2xl truncate">
                           {formatPesos(
                             (data[0].total_valor_bruta * adminZona) / 100
                           )}
                         </p>
+                        <small className="text-xs-small text-[#F5BE40]">
+                          Ganancias Admin zona general
+                        </small>
                       </div>
-
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Ganancias Clientes
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
+                      <div className="w-full flex flex-col justify-center items-center  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]">
+                        <p className="text-lg font-bold text-zinc-900 truncate">
+                          Ganancias Clientes
+                        </p>
+                        <p className="font-extrabold text-[#3DB078] text-2xl truncate">
                           {formatPesos(
                             (data[0].total_valor_bruta * adminZonaGanancias) /
                               100 || 0
                           )}
                         </p>
+                        <small className="text-xs-small text-[#F5BE40]">
+                          Ganancias Clientes general
+                        </small>
                       </div>
                     </section>
 
-                    <h5 className="text-center font-bold">Ventas Hoy</h5>
-                    <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-0">
-                      <div className="border-2 border-zinc-200 rounded-lg p-4  h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Venta Bruta
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
-                          {formatPesos(valorBrutaHoy)}
-                        </p>
-                      </div>
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Venta Neta
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
-                          {formatPesos(ventaNetaHoyNew)}
-                        </p>
-                      </div>
+                    <section className="w-full flex justify-center items-center ">
+                      <p className="text-center font-bold flex items-center text-lg">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/5305/5305244.png"
+                          alt=""
+                          className="w-8 h-8"
+                        />
+                        Ventas Hoy
+                      </p>
+                    </section>
 
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Premios
+                    <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-2 md:gap-y-2">
+                      {itemsHoy.map((item, index) => (
+                        <div
+                          key={index}
+                          className="w-full flex flex-col justify-center items-center bg-white rounded-xl p-3 hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]"
+                        >
+                          {/* Nombre del item */}
+                          <p className="text-lg font-bold text-zinc-900 truncate">
+                            {item.name}
                           </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
-                          {formatPesos(totalPremio)}
-                        </p>
-                      </div>
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900 truncate">
-                            {" "}
-                            Ganancias Admin zona
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
-                          {formatPesos(gananciasAdminZonaNew)}
-                        </p>
-                      </div>
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            Ganancias Clientes
-                          </p>
-                        </div>
-                        <p className="font-bold text-zinc-900 text-lg">
-                          {formatPesos(gananciasHoyNew)}
-                        </p>
-                      </div>
 
-                      <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-                        <div className="flex items-center ">
-                          <SalesIcon />
-                          <p className="text-sm font-bold text-zinc-900">
-                            balance
-                          </p>
-                        </div>
-                        {errorPremio && (
-                          <p className="text-red-500">{errorPremio}</p>
-                        )}
-                        {loadingPremio && <p>Cargando...</p>}
-                        {totalPremio !== undefined &&
-                          ventaNetaHoyNew !== undefined &&
-                          totalPremio !== 0 && (
-                            <p
-                              className={`font-bold text-lg ${
-                                ventaNetaHoyNew - totalPremio < 0
-                                  ? "text-red-500"
-                                  : "text-blue-500"
-                              }`}
-                            >
-                              {formatPesos(ventaNetaHoyNew - totalPremio)}
+                          {/* Renderizado especial para balance */}
+                          {item.name === "balance" ? (
+                            <>
+                              {errorPremio && (
+                                <p className="text-red-500">{errorPremio}</p>
+                              )}
+                              {loadingPremio && <p>Cargando...</p>}
+                              {totalPremio !== undefined &&
+                                ventaNetaHoyNew !== undefined &&
+                                totalPremio !== 0 && (
+                                  <p
+                                    className={`font-bold text-lg ${
+                                      ventaNetaHoyNew - totalPremio < 0
+                                        ? "text-red-500"
+                                        : "text-blue-500"
+                                    }`}
+                                  >
+                                    {formatPesos(ventaNetaHoyNew - totalPremio)}
+                                  </p>
+                                )}
+                              {totalPremio === 0 && (
+                                <p className="font-bold text-lg text-zinc-900">
+                                  Sin balance
+                                </p>
+                              )}
+                            </>
+                          ) : (
+                            // Valor normal para los demás items
+                            <p className="font-extrabold text-[#3DB078] text-2xl truncate">
+                              {item.value}
                             </p>
                           )}
-                        {totalPremio === 0 && (
-                          <p className="font-bold text-lg text-zinc-900">
-                            Sin premio
-                          </p>
-                        )}
-                      </div>
+
+                          {/* Subtítulo */}
+                          <small className="text-xs-small text-[#F5BE40]">
+                            {item.subName}
+                          </small>
+                        </div>
+                      ))}
                     </section>
                   </>
                 ) : (
@@ -259,7 +277,7 @@ export default function ModalCarteraGeneral({ isOpen, onOpenChange, zona }) {
                     </section>
                   </>
                 ) : (
-                  <h2 className="text-xl font-bold text-zinc-900 text-center mt-5s">
+                  <h2 className="text-xl font-bold  text-center mt-5s">
                     Selecciona las fechas de venta
                   </h2>
                 )}

@@ -40,7 +40,7 @@ export default function ModalAdminZona({ isOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 text-center text-black">
                 Inicio de Sesión Admin Zona
               </ModalHeader>
               <ModalBody>
@@ -72,7 +72,7 @@ export default function ModalAdminZona({ isOpen, onOpenChange }) {
                       color="dark"
                       type="submit"
                       variant="bordered"
-                      className="w-full bg-zinc-700 text-white"
+                      className="w-full bg-black text-white"
                       disabled={loading}
                     >
                       {loading ? "Cargando..." : "Inicia sesión"}

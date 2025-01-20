@@ -6,18 +6,20 @@ export default function AdminComponent() {
 
   return (
     <>
-      <section className="w-full mx-auto flex flex-col justify-center items-center">
-        <div className="flex flex-col ml-5 items-start">
-          <h2 className="font-raleway-black text-4xl flex justify-start items-start mb-1">
-            Editar Admin de zona
-          </h2>
-          <p className="w-[90%] md:w-[50%] flex justify-center items-center">
-            En esta sección podrás editar los Admin de zona, Agregar mas o
-            eliminar admin. Estos cambios se guardarán en la base de datos.
-          </p>
-        </div>
-      </section>
-
+      <div className="w-full flex flex-col items-end ml-5 mt-5">
+        <p className="font-raleway-black mb-1 mr-10 text-2xl flex items-center  gap-x-2 font-extrabold">
+          <img
+            src="https://cdn.icon-icons.com/icons2/919/PNG/512/piechart_icon-icons.com_71902.png"
+            alt="loteria"
+            className="w-8 h-8"
+          />
+          Editar Admin de zona
+        </p>
+        <p className="w-[30%] mr-8 text-sm">
+          En esta sección podrás editar los Admin de zona, Agregar mas o
+          eliminar admin. Estos cambios se guardarán en la base de datos.
+        </p>
+      </div>
       <TableadminZona />
       <Toaster
         position="top-center"

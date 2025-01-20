@@ -55,11 +55,11 @@ export default function TableResultados() {
             <>
               <article
                 className="w-[90%] md:max-w-[1200px] mx-auto flex justify-end 
-             mt-2 mb-2 items-center"
+             mt-2 mb-2 items-center "
               >
                 <Input
                   isClearable
-                  className="w-full md:max-w-[30%]"
+                  className="w-full md:max-w-[30%] "
                   placeholder="Search by name..."
                   startContent={<SearchIcon />}
                   onChange={(e) => setFilter(e.target.value)}
@@ -69,7 +69,7 @@ export default function TableResultados() {
 
               <Table
                 style={{
-                  backgroundColor: "#13151a",
+                  backgroundColor: "#000000",
                 }}
                 isStriped
                 className="text-white rounded-xl w-full md:max-w-[1200px] mx-auto p-0 m-0 "
@@ -79,7 +79,7 @@ export default function TableResultados() {
                   {columns.map((col, index) => (
                     <TableColumn
                       style={{
-                        backgroundColor: "#13151a",
+                        backgroundColor: "#000000",
                       }}
                       className="text-white shadow-2xl border-b-2 border-white rounded-xl"
                       key={index}

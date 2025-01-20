@@ -4,8 +4,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
-import LogoutZona from "../components/adminZona/logout";
-import HeaderZona from "../components/adminZona/headerZona";
+import HeaderAdminZona from "../components/adminZona/headerZona";
+import Menu from "../components/MenuAdminZona";
 ---
 
 <!doctype html>
@@ -18,44 +18,16 @@ import HeaderZona from "../components/adminZona/headerZona";
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <HeaderZona client:load />
+  <section class="w-full">
+    <HeaderAdminZona client:load />
+  </section>
   <body class="w-full h-screen bg-gray-100">
     <main class="w-full flex h-screen">
-      <section class="w-[20%] hidden md:block bg-zinc-900">
-        <div class="flex flex-col justify-start items-center mt-10">
-          <h1 class="text-2xl font-bold text-white">Menu</h1>
-          <ul class="list-none p-4 text-white flex flex-col gap-y-2 mt-10">
-            <li
-              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
-            >
-              <a href="/adminZona/dashboard" class="text-white">Home</a>
-            </li>
-
-            <li
-              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
-            >
-              <a href="/adminZona/zonas" class="text-white">zonas</a>
-            </li>
-
-            <li
-              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
-            >
-              <a href="/adminZona/carteras" class="text-white">Cartera</a>
-            </li>
-
-            <li
-              class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center"
-            >
-              <a href="/adminZona/users" class="text-white">Usuarios</a>
-            </li>
-          </ul>
-        </div>
-        <div class="w-full flex flex-col justify-start items-center mt-[45%]">
-          <LogoutZona client:load />
-        </div>
+      <section class="w-[20%] hidden md:block bg-[#000000]">
+        <Menu client:load />
       </section>
       <section
-        class="w-full md:w-[80%] h-full overflow-y-auto overflow-hidden bg-white shadow-lg p-4"
+        class="w-full md:w-[80%] h-full overflow-y-auto overflow-hidden bg-white shadow-lg"
       >
         <slot />
       </section>

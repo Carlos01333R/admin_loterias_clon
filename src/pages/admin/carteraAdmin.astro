@@ -4,10 +4,22 @@ import CarterasGeneralesComponent from "../../components/carteraGeneral";
 ---
 
 <LayoutAdmin title="Cartera">
-  <section>
-    <h2 class="text-2xl font-bold text-center text-zinc-900 mt-3 underline">
+  <div class="w-full hidden md:block">
+    <img class="w-full h-20" src="/Shapedividers.svg" alt="" />
+  </div>
+  <section
+    class="w-full flex justify-center md:justify-end items-center text-white"
+  >
+    <p
+      class="text-center font-bold flex items-center text-xl text-black pr-4 gap-x-2"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/31/31368.png"
+        alt=""
+        class="w-6 h-6"
+      />
       Cartera General
-    </h2>
+    </p>
   </section>
   <CarterasGeneralesComponent client:load />
 </LayoutAdmin>

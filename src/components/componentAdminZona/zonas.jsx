@@ -30,29 +30,55 @@ export default function ZonasComponent() {
 
   return (
     <>
+      <div className="w-full flex justify-center md:justify-end mb-5 px-4">
+        <p className="text-2xl flex gap-x-2 font-bold  mt-3 text-black bg-white px-4 py-2 rounded-xl shadow-xl">
+          <img
+            src="https://cdn.icon-icons.com/icons2/919/PNG/512/piechart_icon-icons.com_71902.png"
+            alt="sectores"
+            className="h-8"
+          />
+          Sectores
+        </p>
+      </div>
+
       <section>
-        {loading && <p>Loading...</p>}
-        {!loading && zonas && (
-          <>
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-4 mx-auto ">
-              {FilterZona.map((zona, index) => {
-                return (
-                  <button
-                    onClick={() => handleOpenModal(zona.nombre)}
-                    key={index}
-                    className=" rounded-lg p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300 h-auto "
-                  >
+        {loading ? (
+          <p className="text-orange-400">Cargando...</p>
+        ) : (
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {FilterZona.map((zona, index) => (
+                <button
+                  onClick={() => handleOpenModal(zona.nombre)}
+                  key={index}
+                  className={`
+                bg-white  rounded-xl p-3 shadow-xl focus:outline-none
+                ${index === 0 ? "md:col-span-1 md:row-span-2" : ""}
+                transition duration-300 ease-in-out transform hover:scale-105
+              `}
+                >
+                  <div className="relative w-full h-full">
                     <img
-                      src="https://trayectoriasenviaje.com/wp-content/uploads/2022/05/que-hacer-cartagena-entrada_ciudad_amurallada.jpg"
+                      src="https://static.comunicae.com/photos/notas/1161993/Barcelona.jpg"
                       alt="zona"
-                      className="rounded-t-xl"
+                      className="w-full h-full object-cover rounded-lg"
                     />
-                    <p>{zona.nombre}</p>
-                  </button>
-                );
-              })}
-            </section>
-          </>
+                    <p
+                      className="
+                    absolute inset-0 flex justify-center items-center 
+                    text-white font-bold bg-black bg-opacity-70
+                    rounded-lg text-2xl
+                  "
+                    >
+                      <p className="bg-white px-2 py-1 rounded-lg text-black">
+                        {zona.nombre}
+                      </p>
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
         )}
       </section>
 

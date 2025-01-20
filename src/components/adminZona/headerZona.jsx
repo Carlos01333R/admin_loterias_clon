@@ -1,69 +1,82 @@
 import { useState } from "react";
 import HamburgerIcon from "../../icons/hamburgerIcon.jsx";
 import CloseIcon from "../../icons/closeIcon.jsx";
-export default function HeaderZona() {
+import LogoutAdminZona from "./logout.jsx";
+
+export default function HeaderAdminZona() {
+  const items = [
+    {
+      name: "Home",
+      href: "/adminZona/dashboard",
+      logo: "/home.svg",
+    },
+    {
+      name: "zonas",
+      href: "/adminZona/zonas",
+      logo: "/pin.svg",
+    },
+    {
+      name: "cartera",
+      href: "/adminZona/carteras",
+      logo: "/cartera.svg",
+    },
+
+    {
+      name: "Usuarios",
+      href: "/adminZona/users",
+      logo: "/user.svg",
+    },
+  ];
+
   const [showHeader, setShowHeader] = useState(false);
   return (
     <>
-      <header className="w-full h-16 bg-zinc-900 flex justify-between items-center text-white">
-        <div className="flex items-center gap-x-5 ml-5 md:ml-10">
-          <a
-            href="/adminZona/dashboard"
-            className="text-white flex items-center gap-x-2"
-          >
-            <img src="/logoAppleSplats.png" alt="Logo" className="w-10 h-10" />
-            <h2 className="font-bold">Admin Zona Dashboard</h2>
-          </a>
-        </div>
-        <section className="md:hidden mr-5">
+      <header className="w-full flex  justify-end  items-center ">
+        <section className="md:hidden p-0 w-[60%] flex justify-end  text-[#0064FF] items-center transition-all duration-300 ease-in-out rounded-l-xl ">
           {showHeader ? (
-            <button onClick={() => setShowHeader(!showHeader)}>
-              {CloseIcon()}
-            </button>
+            <div className="relative flex flex-col items-center">
+              <img src="/Shapedividers.svg" alt="" className="w-full h-12" />
+              <button
+                className="px-2 py-1 absolute top-3 right-0 mt-2 mr-2 bg-white text-[#0064FF] rounded-full"
+                onClick={() => setShowHeader(!showHeader)}
+              >
+                {CloseIcon()}
+              </button>
+            </div>
           ) : (
-            <button onClick={() => setShowHeader(!showHeader)}>
+            <butto
+              className="px-4 py-4"
+              onClick={() => setShowHeader(!showHeader)}
+            >
               {HamburgerIcon()}
-            </button>
+            </butto>
           )}
         </section>
       </header>
 
       {showHeader && (
-        <div className="w-full absolute h-screen flex justify-end items-end z-10 transition-all duration-300 ease-in-out">
-          <section className="w-[60%] bg-zinc-900 h-screen transition-all duration-300 ease-in-out">
-            <div class="w-full flex justify-center items-center mt-10">
-              <img src="/logoAppleSplats.png" alt="Logo" class="w-10 h-10" />
-            </div>
-            <div class="flex flex-col justify-start items-center ">
-              <h1 class="text-2xl font-bold text-white">Menu</h1>
-              <ul class="list-none p-4 text-white flex flex-col gap-y-2 mt-10">
-                <li class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center">
-                  <a href="/adminZona/dashboard" class="text-white">
-                    Home
-                  </a>
-                </li>
-
-                <li class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center">
-                  <a href="/adminZona/zonas" class="text-white">
-                    zonas
-                  </a>
-                </li>
-
-                <li class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center">
-                  <a href="/adminZona/carteras" class="text-white">
-                    Cartera
-                  </a>
-                </li>
-
-                <li class="mb-2 border-b-2 border-white hover:border-zinc-900 transition-all duration-300 flex justify-center items-center">
-                  <a href="/adminZona/users" class="text-white">
-                    Usuarios
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </div>
+        <>
+          <div className="w-full absolute h-screen flex justify-end items-end z-10 transition-all duration-300 ease-in-out">
+            <section className="w-[60%] bg-[#0064FF] h-screen transition-all duration-300 ease-in-out rounded-l-xl">
+              <LogoutAdminZona client:load />
+              <div class="w-full flex flex-col justify-start items-center ">
+                <ul class="w-full list-none p-4 text-white flex flex-col gap-y-2 ">
+                  {items.map((item) => (
+                    <li
+                      key={item.name}
+                      class="w-full bg-white text-[#0064FF] mb-2 rounded-xl py-2 flex justify-center items-center hover:bg-slate-100"
+                    >
+                      <div className="flex items-center text-[#0064FF] gap-x-2">
+                        <img src={item.logo} alt={item.name} class="w-6 h-6" />
+                        {item.component || <a href={item.href}>{item.name}</a>}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </div>
+        </>
       )}
     </>
   );

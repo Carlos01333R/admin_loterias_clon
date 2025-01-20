@@ -16,7 +16,7 @@ export default function Admin_zona() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center ">
       <AdminComponent client:load />
     </div>
   );

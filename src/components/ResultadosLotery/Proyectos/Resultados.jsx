@@ -6,18 +6,21 @@ export default function ResultadosComponent() {
 
   return (
     <>
-      <section className="w-full mx-auto flex flex-col justify-center items-center">
-        <div className="flex flex-col ml-5 items-start">
-          <h2 className="font-raleway-black text-4xl flex justify-start items-start mb-1">
-            Agregar Resultado de loterias
-          </h2>
-          <p className="w-[90%] md:w-[50%] flex justify-center items-center">
-            En esta sección podrás agregar resultados de loterías y ver los
-            premios ganados por cada lotería. Estos cambios se guardarán en la
-            base de datos.
-          </p>
-        </div>
-      </section>
+      <div className="w-full flex flex-col items-end ml-5 ">
+        <p className="font-raleway-black mb-1 mr-10 text-2xl flex items-center  gap-x-2 font-extrabold">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/9913/9913579.png"
+            alt="loteria"
+            className="w-8 h-8"
+          />
+          Agregar Resultado de loterias
+        </p>
+        <p className="w-[30%] mr-8 text-sm">
+          En esta sección podrás agregar resultados de loterías y ver los
+          premios ganados por cada lotería. Estos cambios se guardarán en la
+          base de datos.
+        </p>
+      </div>
 
       <TableResultados />
       <Toaster

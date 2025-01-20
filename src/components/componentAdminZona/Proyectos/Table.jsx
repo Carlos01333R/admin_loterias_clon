@@ -84,7 +84,7 @@ export default function TableProyect() {
 
               <Table
                 style={{
-                  backgroundColor: "#13151a",
+                  backgroundColor: "#000000",
                 }}
                 isStriped
                 className="text-white rounded-xl w-full md:max-w-[1200px] mx-auto p-0 m-0 "
@@ -94,7 +94,7 @@ export default function TableProyect() {
                   {columns.map((col, index) => (
                     <TableColumn
                       style={{
-                        backgroundColor: "#13151a",
+                        backgroundColor: "#000000",
                       }}
                       className="text-white shadow-2xl border-b-2 border-white rounded-xl"
                       key={index}

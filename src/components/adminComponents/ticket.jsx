@@ -99,6 +99,27 @@ export default function Ticket({ fechaInicio, fechaFin }) {
     { name: "TOTAL GANANCIAS", icon: IconDescription },
   ];
 
+  const itemsFecha = [
+    {
+      name: "Venta Bruta",
+      subName: "Venta Bruta general",
+      value: formatPesoCop(totales?.valorBruta),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+    {
+      name: "Ganancias",
+      subName: "Ganancias general",
+      value: formatPesoCop(totales?.ventaNeta),
+      logo: "https://images.vexels.com/media/users/3/147974/isolated/preview/22ed2b8524101426e7b490c95097a8f2-icono-de-ventas-comerciales.png",
+    },
+    {
+      name: "Ganancias Clientes",
+      subName: "Ganancias Clientes general",
+      value: formatPesoCop(totales?.ganancias),
+      logo: "https://cdn-icons-png.freepik.com/512/10997/10997932.png",
+    },
+  ];
+
   if (loading) {
     return <p className="text-center text-zinc-900 font-bold">Cargando...</p>;
   }
@@ -108,36 +129,26 @@ export default function Ticket({ fechaInicio, fechaFin }) {
   }
   return (
     <>
-      <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-0">
-        <div className="border-2 border-zinc-200 rounded-lg p-4  h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">Venta Bruta</p>
+      <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5  gap-y-2 md:gap-y-0">
+        {itemsFecha.map((item, index) => (
+          <div
+            key={index}
+            className="w-full flex  bg-white rounded-xl p-3  hover:scale-105 transition duration-300 ease-in-out transform shadow-xl"
+          >
+            <div className="flex flex-col w-[70%] px-6">
+              <p className="text-lg font-bold text-zinc-900">{item.name}</p>
+              <p className="font-extrabold text-[#3DB078] text-3xl truncate">
+                {item.value}
+              </p>
+              <small className="text-xs-small text-[#F5BE40]">
+                {item.subName}
+              </small>
+            </div>
+            <div className="w-[30%]">
+              <img src={item.logo} alt="ventas" className="h-16" />
+            </div>
           </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(totales?.valorBruta)}
-          </p>
-        </div>
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">Ganancias</p>
-          </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(totales?.ventaNeta)}
-          </p>
-        </div>
-        <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-          <div className="flex items-center ">
-            <SalesIcon />
-            <p className="text-lg font-bold text-zinc-900">
-              Ganancias Clientes
-            </p>
-          </div>
-          <p className="font-bold text-zinc-900">
-            {formatPesoCop(totales?.ganancias)}
-          </p>
-        </div>
+        ))}
       </section>
 
       <div className="flex justify-end mb-4 w-full px-4 mt-2 ">

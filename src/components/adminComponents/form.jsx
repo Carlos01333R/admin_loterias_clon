@@ -1,10 +1,8 @@
-import { useState } from "react";
-
 export default function Form({ desde, hasta }) {
   const handleDesdeChange = (e) => {
     const [year, month, day] = e.target.value.split("-"); // Descomponer la fecha
     const selectedDate = new Date(year, month - 1, day); // Crear una fecha local
-    console.log("Fecha Desde eeppaa: ", selectedDate);
+    console.log("Fecha Desde : ", selectedDate);
     desde(selectedDate);
   };
 
@@ -17,21 +15,24 @@ export default function Form({ desde, hasta }) {
 
   return (
     <>
-      <h2 className="text-center mb-2 mt-3 text-lg text-zinc-900 font-bold">
-        Filtro por fechas
-      </h2>
+      <section className="w-full flex justify-center items-center currentColor mb-3">
+        <p className="text-center mb-2 mt-3 text-lg currentColor font-bold bg-white px-4 py-2 rounded-xl shadow-xl">
+          Filtro por fechas
+        </p>
+      </section>
+
       <div className="w-full flex justify-center items-center gap-x-5">
-        <form className="flex gap-x-10">
+        <form className="flex gap-x-5 md:gap-x-10  ">
           <input
             type="date"
             name="desde"
-            className="border-b-2 border-zinc-900"
+            className="border-2 border-white px-4 py-2 rounded-xl text-black shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]"
             onChange={handleDesdeChange}
           />
           <input
             type="date"
             name="hasta"
-            className="border-b-2 border-zinc-900"
+            className="border-2 border-white px-4 py-2 rounded-xl text-black shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]"
             onChange={handleHastaChange}
           />
         </form>

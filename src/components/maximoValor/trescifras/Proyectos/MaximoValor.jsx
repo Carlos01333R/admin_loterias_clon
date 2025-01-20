@@ -6,16 +6,19 @@ export default function MaximoValorTresCifrasComponent() {
 
   return (
     <>
-      <section className="w-full mx-auto flex flex-col ">
-        <div className="flex flex-col ml-5 items-start">
-          <h2 className="font-raleway-black text-4xl flex justify-start items-start mb-1">
-            Editar maximo valor de 3 cifras
-          </h2>
-          <p className="w-[90%] md:w-[50%] flex ">
-            En esta sección podrás editar el valor maximo.
-          </p>
-        </div>
-      </section>
+      <div className="w-full flex flex-col items-start ml-5">
+        <p className="font-raleway-black mb-1 mr-10 text-2xl flex items-center  gap-x-2 font-extrabold ">
+          <img
+            src="https://images.vexels.com/media/users/3/131263/isolated/lists/af6816ec67ec51da6b275a4aa08d236c-icono-de-circulo-de-bloqueo.png"
+            alt="loteria"
+            className="w-8 h-8"
+          />
+          Editar maximo valor de 3 cifras
+        </p>
+        <p className="w-[30%] mr-8 text-sm mb-5">
+          En esta sección podrás editar el valor maximo.
+        </p>
+      </div>
 
       <TableValorMaximo />
       <Toaster

@@ -106,6 +106,51 @@ export default function ModalCartera({ isOpen, onOpenChange, email, sector }) {
     }
   };
 
+  const itemsHoy = [
+    {
+      name: "Venta Bruta",
+      subName: "Venta Bruta general",
+      value: FormatPesoCOP(valorBrutaHoy),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+    {
+      name: "Venta Neta",
+      subName: "Venta Neta general",
+      value: FormatPesoCOP(ventaNetaHoyNew),
+      logo: "https://images.vexels.com/media/users/3/147974/isolated/preview/22ed2b8524101426e7b490c95097a8f2-icono-de-ventas-comerciales.png",
+    },
+    {
+      name: "premios",
+      subName: "premios general",
+      value: FormatPesoCOP(totalPremio),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias Admin zona",
+      subName: "Ganancias admin general",
+      value: FormatPesoCOP(gananciasAdminZonaNew),
+      logo: "https://cdn-icons-png.freepik.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias usuarios",
+      subName: "Ganancias usuarios general",
+      value: FormatPesoCOP(gananciasHoyNew),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: `total a entregar `,
+      subName: "total de entrega",
+      value: FormatPesoCOP(ventaNetaHoyNew + gananciasAdminZonaNew),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: "balance",
+      subName: "balance general",
+      value: FormatPesoCOP(ventaNetaHoyNew - totalPremio),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+  ];
+
   return (
     <>
       {/* Primer Modal */}
@@ -114,29 +159,49 @@ export default function ModalCartera({ isOpen, onOpenChange, email, sector }) {
         scrollBehavior="inside"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        backdrop="blur"
+        className="bg-[#F4F6FA]"
       >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 justify-center items-center">
-                <p>Usuario:</p>
-                {email}
+                <section class="w-full flex justify-center md:justify-end items-center text-white">
+                  <p class="text-center font-bold flex items-center text-xl text-black pr-4 gap-x-2">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/4042/4042356.png"
+                      alt=""
+                      class="w-6 h-6"
+                    />
+                    {email}
+                  </p>
+                </section>
               </ModalHeader>
               <ModalBody>
                 {loading && <p>Loading sales data...</p>}
                 {error && <p>Error loading sales data: {error.message}</p>}
                 {!loading && !error && (
                   <>
-                    <h4 className="font-bold text-center">Ventas Generales</h4>
+                    <section class="w-full flex justify-center  items-center text-white">
+                      <p class="text-center font-bold flex items-center text-xl text-black pr-4 gap-x-2">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/5305/5305244.png"
+                          alt=""
+                          class="w-6 h-6"
+                        />
+                        venta generales
+                      </p>
+                    </section>
+
                     <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Total Valor Bruta:</p>
-                      <p className="font-bold text-lg">
+                      <p className="font-bold text-xl">Total Valor Bruta:</p>
+                      <p className="font-bold text-2xl text-[#3DB078] text-center">
                         {FormatPesoCOP(salesData.total_valor_bruta)}
                       </p>
                     </div>
                     <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Total Venta Neta:</p>
-                      <p className="font-bold text-lg">
+                      <p className="font-bold text-xl">Total Venta Neta:</p>
+                      <p className="font-bold text-2xl text-[#3DB078] text-center">
                         {FormatPesoCOP(
                           (salesData.total_valor_bruta * adminZonaVentaNeta) /
                             100
@@ -144,8 +209,8 @@ export default function ModalCartera({ isOpen, onOpenChange, email, sector }) {
                       </p>
                     </div>
                     <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Total Ganancias:</p>
-                      <p className="font-bold text-lg">
+                      <p className="font-bold text-xl">Total Ganancias:</p>
+                      <p className="font-bold text-2xl text-[#3DB078] text-center">
                         {FormatPesoCOP(
                           (salesData.total_valor_bruta * adminZonaGanancias) /
                             100
@@ -154,97 +219,83 @@ export default function ModalCartera({ isOpen, onOpenChange, email, sector }) {
                     </div>
                     <hr />
 
-                    <h4 className="font-bold text-center">Ventas Hoy</h4>
-
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Total Valor Bruta:</p>
-                      <p className="font-bold text-lg">
-                        {FormatPesoCOP(valorBrutaHoy)}
+                    <section class="w-full flex justify-center  items-center text-white">
+                      <p class="text-center font-bold flex items-center text-xl text-black pr-4 gap-x-2">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/5305/5305244.png"
+                          alt=""
+                          class="w-6 h-6"
+                        />
+                        Ventas Hoy
                       </p>
-                    </div>
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Total Venta Neta:</p>
-                      <p className="font-bold text-lg">
-                        {FormatPesoCOP(ventaNetaHoyNew)}
-                      </p>
-                    </div>
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Ganancias Usuario:</p>
-                      <p className="font-bold text-lg">
-                        {FormatPesoCOP(gananciasHoyNew)}
-                      </p>
-                    </div>
+                    </section>
 
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Ganancias Admin Zona:</p>
-                      <p className="font-bold text-lg">
-                        {FormatPesoCOP(gananciasAdminZonaNew)}
-                      </p>
-                    </div>
-
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold text-lg">
-                        Total de entregar a {email}
-                      </p>
-                      <p className="font-bold text-lg text-green-600">
-                        {FormatPesoCOP(ventaNetaHoyNew + gananciasAdminZonaNew)}
-                      </p>
-                    </div>
-
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Premios</p>
-                      {errorPremio && (
-                        <p className="text-red-500">{errorPremio}</p>
-                      )}
-                      {loadingPremio && <p>Cargando...</p>}
-                      {!loadingPremio && (
-                        <p className="font-bold text-lg">
-                          {FormatPesoCOP(totalPremio)}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="w-[90%] flex justify-between items-center">
-                      <p className="font-bold">Balance</p>
-                      {errorPremio && (
-                        <p className="text-red-500">{errorPremio}</p>
-                      )}
-                      {loadingPremio && <p>Cargando...</p>}
-                      {totalPremio !== undefined &&
-                        ventaNetaHoyNew !== undefined &&
-                        totalPremio !== 0 && (
-                          <p
-                            className={`font-bold text-lg ${
-                              ventaNetaHoyNew - totalPremio < 0
-                                ? "text-red-500"
-                                : "text-blue-500"
-                            }`}
-                          >
-                            {FormatPesoCOP(ventaNetaHoyNew - totalPremio)}
-                          </p>
-                        )}
-                      {totalPremio === 0 && (
-                        <p className="font-bold text-lg text-zinc-900">
-                          Sin premio
-                        </p>
-                      )}
-                    </div>
-
-                    {FilteredUsers.length > 0 ? (
-                      FilteredUsers.map((user) => (
+                    <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-2 md:gap-y-2">
+                      {itemsHoy.map((item, index) => (
                         <div
-                          key={user.id}
-                          className="w-[90%] flex justify-between items-center"
+                          key={index}
+                          className="w-full flex flex-col justify-center items-center bg-white rounded-xl p-3 hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]"
                         >
-                          <p className="font-bold">Mora</p>
-                          <p className="font-bold text-lg text-red-500">
-                            {FormatPesoCOP(user.mora)}
+                          {/* Nombre del item */}
+                          <p className="text-lg font-bold text-zinc-900 truncate">
+                            {item.name}
                           </p>
+
+                          {/* Renderizado especial para balance */}
+                          {item.name === "balance" ? (
+                            <>
+                              {errorPremio && (
+                                <p className="text-red-500">{errorPremio}</p>
+                              )}
+                              {loadingPremio && <p>Cargando...</p>}
+                              {totalPremio !== undefined &&
+                                ventaNetaHoyNew !== undefined &&
+                                totalPremio !== 0 && (
+                                  <p
+                                    className={`font-bold text-lg ${
+                                      ventaNetaHoyNew - totalPremio < 0
+                                        ? "text-red-500"
+                                        : "text-blue-500"
+                                    }`}
+                                  >
+                                    {item.value}
+                                  </p>
+                                )}
+                              {totalPremio === 0 && (
+                                <p className="font-bold text-lg text-zinc-900">
+                                  Sin balance
+                                </p>
+                              )}
+                            </>
+                          ) : (
+                            // Valor normal para los demás items
+                            <p className="font-extrabold text-[#3DB078] text-2xl truncate">
+                              {item.value}
+                            </p>
+                          )}
+
+                          {/* Subtítulo */}
+                          <small className="text-xs-small text-[#F5BE40]">
+                            {item.subName}
+                          </small>
                         </div>
-                      ))
-                    ) : (
-                      <p>No se encontraron usuarios.</p>
-                    )}
+                      ))}
+                      {FilteredUsers.length > 0 ? (
+                        FilteredUsers.map((user) => (
+                          <div
+                            key={user.id}
+                            className="w-full flex flex-col justify-center items-center bg-white rounded-xl p-3 hover:scale-105 transition duration-300 ease-in-out transform shadow-[0px_5px_17px_-1px_rgba(204,204,204,0.65)]"
+                          >
+                            <p className="font-bold">Mora</p>
+                            <p className="font-bold text-lg text-red-500">
+                              {FormatPesoCOP(user.mora)}
+                            </p>
+                          </div>
+                        ))
+                      ) : (
+                        <p>No se encontraron usuarios.</p>
+                      )}
+                    </section>
                   </>
                 )}
 

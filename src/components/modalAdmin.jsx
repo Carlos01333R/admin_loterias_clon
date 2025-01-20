@@ -40,13 +40,12 @@ export default function ModalAdmin({ isOpen, onOpenChange }) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 text-center text-black">
                 Inicio de Sesión
               </ModalHeader>
               <ModalBody>
                 <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                   <Input
-                    autoFocus
                     endContent={
                       <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                     }
@@ -58,12 +57,13 @@ export default function ModalAdmin({ isOpen, onOpenChange }) {
                   />
                   <Input
                     endContent={
-                      <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                      <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 " />
                     }
                     label="Password"
                     placeholder="Ingresa su Contraseña"
                     type="password"
                     variant="bordered"
+                    className=""
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                   />
@@ -72,7 +72,7 @@ export default function ModalAdmin({ isOpen, onOpenChange }) {
                       color="dark"
                       type="submit"
                       variant="bordered"
-                      className="w-full bg-zinc-700 text-white"
+                      className="w-full bg-black text-white"
                       disabled={loading}
                     >
                       {loading ? "Cargando..." : "Inicia sesión"}
@@ -91,7 +91,6 @@ export default function ModalAdmin({ isOpen, onOpenChange }) {
             </>
           )}
         </ModalContent>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </Modal>
       <Toaster position="top-right" />
     </>

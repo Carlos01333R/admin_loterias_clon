@@ -104,11 +104,19 @@ export default function WinLoterias() {
 
   return (
     <>
-      <ResultadosComponent />
+      <section className="w-full flex justify-center items-center ">
+        <img className="w-full h-20" src="/Shapedividers.svg" alt="" />
+      </section>
+      <section className="w-full">
+        <ResultadosComponent />
+      </section>
+
       <div className="container mx-auto mt-8 p-4">
-        <h1 className="text-2xl font-bold mb-4">
-          Resultados de Lotería ganadores hoy
-        </h1>
+        <section className="w-full flex justify-end items-center ">
+          <p className="text-2xl font-extrabold mb-4">
+            Resultados de Lotería ganadores hoy
+          </p>
+        </section>
 
         {filteredMatches.length === 0 ? (
           <p>No se encontraron coincidencias para los boletos de hoy.</p>

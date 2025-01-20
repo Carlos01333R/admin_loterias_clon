@@ -7,7 +7,14 @@ export default {
 		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			fontSize: {
+				'xs-small': '0.6rem',   // Tamaño personalizado más pequeño
+				'xxl': '1.75rem',       // Tamaño entre xl y 2xl
+				'xxxl': '2.5rem',       // Tamaño grande adicional
+				'giant': '5rem',        // Tamaño extremadamente grande
+			  },
+		},
 	},
 
 	plugins: [nextui()],

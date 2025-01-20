@@ -18,6 +18,13 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
     error: errorPremio,
   } = usePremioByFecha(desde, hasta, zona);
 
+  const formatPesoCop = (amount) => {
+    return new Intl.NumberFormat("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    }).format(amount);
+  };
+
   const { zonas } = useZonas();
 
   const adminZona = zonas
@@ -38,20 +45,53 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const formatPesoCop = (amount) => {
-    return new Intl.NumberFormat("es-ES", {
-      style: "currency",
-      currency: "EUR",
-    }).format(amount);
-  };
   const handleOpenModal = () => {
     onOpen(); // Abrir el modal
   };
 
+  const itemsHoy = [
+    {
+      name: "Venta Bruta",
+      subName: "Venta Bruta general",
+      value: formatPesoCop(totales?.valorBruta),
+      logo: "https://cdn-icons-png.flaticon.com/512/5305/5305244.png",
+    },
+    {
+      name: "Venta Neta",
+      subName: "Venta Neta general",
+      value: formatPesoCop(ventaNetaHoyNew),
+      logo: "https://images.vexels.com/media/users/3/147974/isolated/preview/22ed2b8524101426e7b490c95097a8f2-icono-de-ventas-comerciales.png",
+    },
+    {
+      name: "premios",
+      subName: "premios general",
+      value: formatPesoCop(premio),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias Admin zona",
+      subName: "Ganancias admin general",
+      value: formatPesoCop(gananciasAdminZonaNew),
+      logo: "https://cdn-icons-png.freepik.com/512/10997/10997932.png",
+    },
+    {
+      name: "Ganancias usuarios",
+      subName: "Ganancias usuarios general",
+      value: formatPesoCop(gananciasHoyNew),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+    {
+      name: "balance",
+      subName: "balance general",
+      value: formatPesoCop(ventaNetaHoyNew - premio),
+      logo: "https://cdn-icons-png.flaticon.com/512/10997/10997932.png",
+    },
+  ];
+
   return (
     <>
       <section>
-        <h2 className="text-xl font-bold text-zinc-900 text-center mt-5">
+        <h2 className="text-xl font-bold  text-center mt-5">
           Selecciona las fechas de venta
         </h2>
 
@@ -60,91 +100,61 @@ export default function TotalFechas({ desde, hasta, zona, onClose }) {
         {loading ? (
           <p>Cargando...</p>
         ) : (
-          <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-x-5 p-3 gap-y-2 md:gap-y-2">
-            <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-              <div className="flex items-center">
-                <SalesIcon />
-                <p className="text-sm font-bold text-zinc-900">Venta Bruta</p>
-              </div>
-              <p className="font-bold text-lg text-zinc-900">
-                {formatPesoCop(totales?.valorBruta)}
-              </p>
-            </div>
-            <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-              <div className="flex items-center">
-                <SalesIcon />
-                <p className="text-sm font-bold text-zinc-900">Venta Neta</p>
-              </div>
-              <p className="font-bold text-lg text-zinc-900">
-                {formatPesoCop(ventaNetaHoyNew)}
-              </p>
-            </div>
+          <section className="w-full p-4 grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-2 md:gap-y-2">
+            {itemsHoy.map((item, index) => (
+              <div
+                key={index}
+                className="w-full flex flex-col justify-center items-center bg-white rounded-xl p-3 hover:scale-105 transition duration-300 ease-in-out transform shadow-xl"
+              >
+                {/* Nombre del item */}
+                <p className="text-lg font-bold text-zinc-900 truncate">
+                  {item.name}
+                </p>
 
-            <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-              <div className="flex items-center">
-                <SalesIcon />
-                <p className="text-sm font-bold text-zinc-900">premio</p>
-              </div>
-              {errorPremio && <p className="text-red-500">{errorPremio}</p>}
-              {loadingPremio && <p>Cargando...</p>}
-              {premio && (
-                <p className="font-bold text-lg text-zinc-900">
-                  {formatPesoCop(premio)}
-                </p>
-              )}
-            </div>
-            <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-              <div className="flex items-center">
-                <SalesIcon />
-                <p className="text-sm font-bold text-zinc-900 truncate">
-                  Ganancias admin zona
-                </p>
-              </div>
-              <p className="font-bold text-lg text-zinc-900">
-                {formatPesoCop(gananciasAdminZonaNew)}
-              </p>
-            </div>
-            <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-              <div className="flex items-center">
-                <SalesIcon />
-                <p className="text-sm font-bold text-zinc-900">
-                  Ganancias Clientes
-                </p>
-              </div>
-              <p className="font-bold text-lg text-zinc-900">
-                {formatPesoCop(gananciasHoyNew)}
-              </p>
-            </div>
-
-            <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
-              <div className="flex items-center">
-                <SalesIcon />
-                <p className="text-sm font-bold text-zinc-900">Balance</p>
-              </div>
-              {errorPremio && <p className="text-red-500">{errorPremio}</p>}
-              {loadingPremio && <p>Cargando...</p>}
-              {premio !== undefined &&
-                ventaNetaHoyNew !== undefined &&
-                premio !== 0 && (
-                  <p
-                    className={`font-bold text-lg ${
-                      ventaNetaHoyNew - premio < 0
-                        ? "text-red-500"
-                        : "text-blue-500"
-                    }`}
-                  >
-                    {formatPesoCop(ventaNetaHoyNew - premio)}
+                {/* Renderizado especial para balance */}
+                {item.name === "balance" ? (
+                  <>
+                    {errorPremio && (
+                      <p className="text-red-500">{errorPremio}</p>
+                    )}
+                    {loadingPremio && <p>Cargando...</p>}
+                    {premio !== undefined &&
+                      ventaNetaHoyNew !== undefined &&
+                      premio !== 0 && (
+                        <p
+                          className={`font-bold text-lg ${
+                            ventaNetaHoyNew - premio < 0
+                              ? "text-red-500"
+                              : "text-blue-500"
+                          }`}
+                        >
+                          {item.value}
+                        </p>
+                      )}
+                    {premio === 0 && (
+                      <p className="font-bold text-lg text-zinc-900">
+                        Sin balance
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  // Valor normal para los demás items
+                  <p className="font-extrabold text-[#3DB078] text-2xl truncate">
+                    {item.value}
                   </p>
                 )}
-              {premio === 0 && (
-                <p className="font-bold text-lg text-zinc-900">Sin premio</p>
-              )}
-            </div>
 
+                {/* Subtítulo */}
+                <small className="text-xs-small text-[#F5BE40]">
+                  {item.subName}
+                </small>
+              </div>
+            ))}
             {premio !== 0 && (
-              <div className="border-2 border-zinc-200 rounded-lg p-4 h-20 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300">
+              <div className="w-full flex flex-col justify-center items-center bg-white rounded-xl p-3 hover:scale-105 transition duration-300 ease-in-out transform shadow-xl">
                 <div className="flex items-center">
                   <Button
+                    className="focus:outline-none"
                     color="success"
                     variant="light"
                     onPress={handleOpenModal}

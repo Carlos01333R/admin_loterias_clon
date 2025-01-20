@@ -49,12 +49,40 @@ export default function CarterasGeneralesComponent() {
               <button
                 onClick={() => handleOpenModal(user.email)} // Pasar la función correctamente
                 key={user.id}
-                className="rounded-lg p-4 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] flex flex-col justify-center items-center hover:scale-105 transition-all duration-300 h-auto"
+                className="w-full max-w-xs mx-auto bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transition duration-300 ease-in-out transform focus:outline-none"
               >
-                <p>{user.nombre}</p>
-                <p>{user.email}</p>
-                <p>{user.telefono}</p>
-                <p>{user.sector}</p>
+                {/* Header Background */}
+                <div className="h-24 bg-black"></div>
+
+                {/* Profile Content */}
+                <div className="relative px-4 pb-6 -mt-12 text-center">
+                  {/* Profile Image */}
+                  <div className="inline-block relative">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/4042/4042356.png"
+                      alt="Profile"
+                      className="w-24 h-24 rounded-full border-4 border-white object-cover"
+                    />
+                  </div>
+
+                  {/* Profile Info */}
+                  <h2 className="mt-2 text-xl font-semibold text-gray-800">
+                    {user.nombre}
+                  </h2>
+                  <p className="text-gray-600 text-sm">{user.email}</p>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-2 mt-4 justify-center">
+                    <button className="px-6 py-2 bg-black text-white rounded-full hover:bg-blue-600 transition-colors">
+                      {user.telefono}
+                    </button>
+                    <button className="px-6 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors">
+                      {user.sector}
+                    </button>
+                  </div>
+
+                  {/* Stats */}
+                </div>
               </button>
             ))}
           </section>
