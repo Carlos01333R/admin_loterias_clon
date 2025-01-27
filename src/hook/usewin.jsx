@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 
-// Función para generar todas las combinaciones posibles de un número
+// Función para obtener la combinación de un número de boleto
 const getCombinaciones = (numero) => {
   const permutations = (str) => {
     if (str.length === 1) return [str];
@@ -18,72 +18,85 @@ const getCombinaciones = (numero) => {
   return permutations(numero);
 };
 
-const getCurrentFormattedDate = () => {
-  const today = new Date();
-  return today.toISOString().split("T")[0]; // Formato: YYYY-MM-DD
-};
-
 const useLoteriaComparison = () => {
   const [ventas, setVentas] = useState([]);
   const [apiResults, setApiResults] = useState([]);
   const [matches, setMatches] = useState([]);
 
-  const getDateRange = () => {
-    const now = new Date();
-    const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
-
-    const formatDate = (date) => {
-      return date.toISOString().split("T")[0];
-    };
-
-    return {
-      startDate: formatDate(twoDaysAgo),
-      endDate: formatDate(now),
-    };
+  // Función para obtener la fecha de hace 48 horas en formato D/M/YYYY
+  const getDate48HoursAgo = () => {
+    const today = new Date();
+    today.setHours(today.getHours() - 48); // Restamos 48 horas
+    const day = today.getDate(); // Día sin ceros a la izquierda
+    const month = today.getMonth() + 1; // Enero es 0, así que sumamos 1
+    const year = today.getFullYear();
+    return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(
+      2,
+      "0"
+    )}T${String(today.getHours()).padStart(2, "0")}:${String(
+      today.getMinutes()
+    ).padStart(2, "0")}:${String(today.getSeconds()).padStart(2, "0")}`; // Formato YYYY-MM-DDTHH:mm:ss
   };
 
   useEffect(() => {
-    const fetchVentas = async () => {
-      const { data, error } = await supabase
-        .from("ventas")
-        .select(
-          "loterias, boletos, nombre, celular, fecha, hora, fecha_hora, numero_venta, zona, vendedor"
-        );
+    const fetchVentasUltimas48Horas = async () => {
+      try {
+        const date48HoursAgo = getDate48HoursAgo(); // Obtener fecha de hace 48 horas
 
-      if (error) {
-        console.error("Error fetching ventas:", error);
-      } else {
-        setVentas(data);
-        console.log("ventas:", data);
+        const { data, error } = await supabase
+          .from("ventas")
+          .select(
+            "loterias, boletos, nombre, celular, fecha, hora, fecha_hora, numero_venta, zona, vendedor"
+          )
+          .gte("fecha_hora", date48HoursAgo); // Filtrar por fecha_hora mayor o igual a las últimas 48 horas
+
+        if (error) {
+          console.error("Error al obtener ventas:", error);
+        } else {
+          console.log("Ventas en las últimas 48 horas:", data);
+          setVentas(data); // Guardar ventas obtenidas
+        }
+      } catch (error) {
+        console.error(
+          "Error al obtener ventas en las últimas 48 horas:",
+          error
+        );
       }
     };
 
-    const fetchApiResults = async () => {
+    const fetchLastTwoDaysResults = async () => {
       try {
-        const { startDate, endDate } = getDateRange();
+        const today = new Date();
+        const twoDaysAgo = new Date();
+        twoDaysAgo.setDate(today.getDate() - 2);
+
+        // Convertimos las fechas a formato YYYY-MM-DD
+        const formattedToday = today.toISOString().split("T")[0];
+        const formattedTwoDaysAgo = twoDaysAgo.toISOString().split("T")[0];
+
+        // Hacemos la consulta al supabase
         const { data, error } = await supabase
           .from("resultados_loteria")
           .select("lottery, result, date")
-          .gte("date", startDate)
-          .lte("date", endDate)
-          .order("date", { ascending: false });
+          .gte("date", formattedTwoDaysAgo) // Fecha >= hace dos días
+          .lte("date", formattedToday); // Fecha <= hoy
 
         if (error) {
           console.error(
-            "Error fetching resultados_loteria from Supabase:",
+            "Error al obtener resultados de los últimos dos días:",
             error
           );
         } else {
-          setApiResults(data);
-          console.log("Resultados de la API:", data);
+          console.log("Resultados de los últimos dos días:", data);
+          setApiResults(data); // Guardamos los resultados en el estado (si se usa)
         }
       } catch (error) {
-        console.error("Error fetching data from Supabase:", error);
+        console.error("Error inesperado al recuperar datos:", error);
       }
     };
 
-    fetchVentas();
-    fetchApiResults();
+    fetchVentasUltimas48Horas(); // Obtener ventas de las últimas 48 horas
+    fetchLastTwoDaysResults(); // Obtener resultados de la lotería de las últimos 2 días
   }, []);
 
   useEffect(() => {
@@ -114,7 +127,7 @@ const useLoteriaComparison = () => {
             const ventaFormattedDate = `${year}-${String(month).padStart(
               2,
               "0"
-            )}-${day.length > 1 ? day : `0${day}`}`;
+            )}-${String(day).padStart(2, "0")}`;
 
             if (
               loteriasVenta.includes(lotteryName) &&
