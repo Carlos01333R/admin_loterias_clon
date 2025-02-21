@@ -21,10 +21,6 @@ const useVentasHoyAdminZona = ({ sector, email }) => {
   const fetchVentasHoy = useCallback(async () => {
     const fechaHoy = obtenerFechaActual();
 
-    if (fechaHoy === fechaActual) {
-      return; // No actualizar si la fecha no ha cambiado
-    }
-
     let query = supabase
       .from("ventas")
       .select("valor_bruta, venta_neta, ganancias")
@@ -65,22 +61,19 @@ const useVentasHoyAdminZona = ({ sector, email }) => {
     setVentaNetaHoy(totalVentaNeta);
     setGananciasHoy(totalGanancias);
     setFechaActual(fechaHoy);
-  }, [sector, email, fechaActual]);
+  }, [sector, email, obtenerFechaActual]);
 
   useEffect(() => {
-    fetchVentasHoy(); // Ejecutar inmediatamente al montar el componente
+    fetchVentasHoy(); // Ejecutar cuando se monta el componente o cambian las dependencias
 
     // Configurar un intervalo para comprobar cambios de fecha cada minuto
     const intervalo = setInterval(() => {
-      const nuevaFecha = obtenerFechaActual();
-      if (nuevaFecha !== fechaActual) {
-        fetchVentasHoy();
-      }
+      fetchVentasHoy();
     }, 60000); // 60000 ms = 1 minuto
 
     // Limpiar el intervalo al desmontar el componente
     return () => clearInterval(intervalo);
-  }, [fetchVentasHoy, obtenerFechaActual, fechaActual]);
+  }, [fetchVentasHoy, sector]);
 
   return { valorBrutaHoy, ventaNetaHoy, gananciasHoy, adminZona, fechaActual };
 };

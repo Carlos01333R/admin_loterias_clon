@@ -8,7 +8,7 @@ export default function Shapedividers() {
       >
         <path
           d="M0 1c3.17.8 7.29-.38 10.04-.55 2.75-.17 9.25 1.47 12.67 1.3 3.43-.17 4.65-.84 7.05-.87 2.4-.02 5.52.88 5.52.88V0H0z"
-          fill="#fae0cf"
+          fill="#2B7FFF"
         />
       </svg>
     </section>
