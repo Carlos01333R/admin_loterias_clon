@@ -1,0 +1,13 @@
+---
+import LayoutAdmin from "../../layouts/LayoutAdmin.astro";
+import LotteryAnalysis from "../../components/Frecuencia.jsx";
+---
+
+<LayoutAdmin title="Frecuencia de loterias">
+  <main>
+    <div class="w-full hidden md:block">
+      <img class="w-full h-20" src="/Shapedividers.svg" alt="" />
+    </div>
+    <LotteryAnalysis client:load />
+  </main>
+</LayoutAdmin>

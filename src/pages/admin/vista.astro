@@ -1,0 +1,15 @@
+---
+import LayoutAdmin from "../../layouts/LayoutAdmin.astro";
+import VistaUsuario from "../../components/vista";
+---
+
+<LayoutAdmin title="vista general">
+  <main>
+    <div class="w-full hidden md:block">
+      <img class="w-full h-20" src="/Shapedividers.svg" alt="" />
+    </div>
+    <div class="p-6">
+      <VistaUsuario client:load />
+    </div>
+  </main>
+</LayoutAdmin>

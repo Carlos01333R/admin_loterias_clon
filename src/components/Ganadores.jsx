@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../hook/supabaseClient";
 import useGanadores from "../hook/ganadores";
 import { Toaster } from "sonner";
@@ -13,6 +13,8 @@ import {
 
 export default function GanadoresLoterias() {
   const { ganadores, loading, error } = useGanadores();
+  const [fechaFiltro, setFechaFiltro] = useState("");
+  const [numeroVentaFiltro, setNumeroVentaFiltro] = useState("");
 
   useEffect(() => {
     const checkSession = async () => {
@@ -37,9 +39,7 @@ export default function GanadoresLoterias() {
     { name: "LOTERIA" },
     { name: "BOLETO" },
     { name: "RESULTADO" },
-    { name: "COINCIDENCIA 2" },
-    { name: "COINCIDENCIA 3" },
-    { name: "COINCIDENCIA 4" },
+    { name: "Modalidad" },
     { name: "NOMBRE" },
     { name: "CELULAR" },
     { name: "FECHA" },
@@ -48,6 +48,47 @@ export default function GanadoresLoterias() {
     { name: "PREMIO" },
     { name: "TICKET" },
   ];
+
+  // Función para formatear la fecha en el formato "d/M/yyyy"
+  const formatearFecha = (fecha) => {
+    const date = new Date(fecha);
+    const dia = date.getDate();
+    const mes = date.getMonth() + 1; // Los meses van de 0 a 11
+    const año = date.getFullYear();
+    return `${dia}/${mes}/${año}`;
+  };
+
+  // Función para parsear la fecha del filtro
+  const parsearFechaFiltro = (fechaString) => {
+    if (!fechaString) return null;
+    const [year, month, day] = fechaString.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  // Función para parsear la fecha de los ganadores
+  const parsearFechaGanador = (fechaString) => {
+    if (!fechaString) return null;
+    const [day, month, year] = fechaString.split("/").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  // Función para filtrar los ganadores
+  const ganadoresFiltrados = ganadores.filter((match) => {
+    // Filtrar por fecha
+    const fechaMatch = parsearFechaGanador(match.fecha);
+    const fechaFiltroDate = parsearFechaFiltro(fechaFiltro);
+
+    const coincideFecha = fechaFiltroDate
+      ? fechaMatch && fechaMatch.getTime() === fechaFiltroDate.getTime()
+      : true;
+
+    // Filtrar por número de venta
+    const coincideNumeroVenta = numeroVentaFiltro
+      ? match.numero_venta.includes(numeroVentaFiltro)
+      : true;
+
+    return coincideFecha && coincideNumeroVenta;
+  });
 
   return (
     <>
@@ -59,6 +100,42 @@ export default function GanadoresLoterias() {
         </h2>
       ) : (
         <>
+          <div className="flex gap-4 mb-6 px-4 py-2">
+            {/* Filtro por fecha */}
+            <div>
+              <label
+                htmlFor="fechaFiltro"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Filtrar por fecha:
+              </label>
+              <input
+                type="date"
+                id="fechaFiltro"
+                value={fechaFiltro}
+                onChange={(e) => setFechaFiltro(e.target.value)}
+                className="mt-1 p-2 border border-gray-300 rounded-md"
+              />
+            </div>
+
+            {/* Filtro por número de venta */}
+            <div>
+              <label
+                htmlFor="numeroVentaFiltro"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Filtrar por número de venta:
+              </label>
+              <input
+                type="text"
+                id="numeroVentaFiltro"
+                value={numeroVentaFiltro}
+                onChange={(e) => setNumeroVentaFiltro(e.target.value)}
+                placeholder="Ingrese el número de venta"
+                className="mt-1 p-2 border border-gray-300 rounded-md"
+              />
+            </div>
+          </div>
           <section className="w-full flex justify-end items-center ">
             <h2 className="text-2xl font-bold mt-5 mb-10 flex items-center gap-x-2 mr-10 ">
               <img
@@ -70,7 +147,7 @@ export default function GanadoresLoterias() {
             </h2>
           </section>
           <div className="p-4  ">
-            {ganadores && ganadores.length === 0 ? (
+            {ganadoresFiltrados.length === 0 ? (
               <p>No se encontraron ganadores.</p>
             ) : (
               <Table
@@ -95,20 +172,17 @@ export default function GanadoresLoterias() {
                   ))}
                 </TableHeader>
                 <TableBody>
-                  {ganadores.map((match, index) => (
+                  {ganadoresFiltrados.map((match, index) => (
                     <TableRow key={index}>
                       <TableCell>{match.lottery}</TableCell>
                       <TableCell>{match.boleto}</TableCell>
                       <TableCell>{match.result}</TableCell>
                       <TableCell>
-                        {match.match2 === "true" ? "✔️" : "❌"}
+                        {match.match2 === "true" ? " * 2 cifras" : ""}
+                        {match.match3 === "true" ? " * 3 cifras" : ""}
+                        {match.match4 === "true" ? " * 4 cifras" : ""}
                       </TableCell>
-                      <TableCell>
-                        {match.match3 === "true" ? "✔️" : "❌"}
-                      </TableCell>
-                      <TableCell>
-                        {match.match4 === "true" ? "✔️" : "❌"}
-                      </TableCell>
+
                       <TableCell>{match.nombre}</TableCell>
                       <TableCell>{match.celular}</TableCell>
                       <TableCell>{match.fecha}</TableCell>

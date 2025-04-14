@@ -1,0 +1,10 @@
+---
+import LayoutAdmin from "../../layouts/LayoutAdmin.astro";
+import TablaLoterias from "../../components/TablaLoterias";
+import Notificacion from "../../components/notificacion";
+---
+
+<LayoutAdmin title="Loterias">
+  <TablaLoterias client:load />
+  <Notificacion client:load />
+</LayoutAdmin>

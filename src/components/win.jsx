@@ -5,6 +5,7 @@ import ResultadosComponent from "./ResultadosLotery/Proyectos/Resultados";
 
 export default function WinLoterias() {
   const { matches } = useLoteriaComparison();
+
   const [savedMatches, setSavedMatches] = useState(new Set());
 
   useEffect(() => {
@@ -26,6 +27,19 @@ export default function WinLoterias() {
       style: "currency",
       currency: "EUR",
     }).format(amount);
+  };
+
+  const FormarPesoCopString = (value) => {
+    // Convertir el string a número (float o int)
+    const numericValue =
+      typeof value === "string"
+        ? parseFloat(value.replace(/[^\d.-]/g, "")) || 0
+        : Number(value) || 0;
+
+    return numericValue.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    });
   };
 
   // Función para agrupar los premios por numero_venta
@@ -82,13 +96,54 @@ export default function WinLoterias() {
       const matchString = JSON.stringify(matchData);
 
       if (!savedMatches.has(matchString)) {
-        const { data, error } = await supabase.from("win").insert([matchData]);
+        // Verificar si ya existe un registro con la misma fecha_hora
+        const { data: existingRecord, error: fetchError } = await supabase
+          .from("win")
+          .select("*")
+          .eq("fecha_hora", matchData.fecha_hora)
+          .single();
 
-        if (error) {
-          console.error("Error saving win data:", error);
+        if (fetchError && fetchError.code !== "PGRST116") {
+          // PGRST116 es el código para "no rows found"
+          console.error("Error fetching existing record:", fetchError);
+          continue;
+        }
+
+        if (existingRecord) {
+          // Si el registro existe y los valores de boleto o premio son diferentes, actualiza el registro
+          if (
+            existingRecord.boleto !== matchData.boleto ||
+            existingRecord.premio !== matchData.premio
+          ) {
+            const { data: updatedRecord, error: updateError } = await supabase
+              .from("win")
+              .update(matchData)
+              .eq("fecha_hora", matchData.fecha_hora);
+
+            if (updateError) {
+              console.error("Error updating win data:", updateError);
+            } else {
+              console.log("Win data updated successfully:", updatedRecord);
+              setSavedMatches((prev) => new Set(prev).add(matchString));
+            }
+          } else {
+            console.log(
+              "Coincidencia ya guardada en la base de datos:",
+              matchData
+            );
+          }
         } else {
-          console.log("Win data saved successfully:", data);
-          setSavedMatches((prev) => new Set(prev).add(matchString));
+          // Si no existe, inserta el nuevo registro
+          const { data, error } = await supabase
+            .from("win")
+            .insert([matchData]);
+
+          if (error) {
+            console.error("Error saving win data:", error);
+          } else {
+            console.log("Win data saved successfully:", data);
+            setSavedMatches((prev) => new Set(prev).add(matchString));
+          }
         }
       } else {
         console.log("Coincidencia ya guardada en la base de datos:", matchData);
@@ -104,19 +159,11 @@ export default function WinLoterias() {
 
   return (
     <>
-      <section className="w-full flex justify-center items-center ">
-        <img className="w-full h-20" src="/Shapedividers.svg" alt="" />
-      </section>
-      <section className="w-full">
-        <ResultadosComponent />
-      </section>
-
+      <ResultadosComponent />
       <div className="container mx-auto mt-8 p-4">
-        <section className="w-full flex justify-end items-center ">
-          <p className="text-2xl font-extrabold mb-4">
-            Resultados de Lotería ganadores hoy
-          </p>
-        </section>
+        <h1 className="text-2xl font-bold mb-4">
+          Resultados de Lotería ganadores hoy
+        </h1>
 
         {filteredMatches.length === 0 ? (
           <p>No se encontraron coincidencias para los boletos de hoy.</p>
@@ -131,15 +178,16 @@ export default function WinLoterias() {
                     Resultado
                   </th>
 
-                  <th className="px-4 py-2 border border-gray-300">2 Cifras</th>
-                  <th className="px-4 py-2 border border-gray-300">3 Cifras</th>
-                  <th className="px-4 py-2 border border-gray-300">4 Cifras</th>
-                  <th className="px-4 py-2 border border-gray-300">Combi</th>
+                  <th className="px-4 py-2 border border-gray-300">
+                    Modalidad
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300">Valor</th>
                   <th className="px-4 py-2 border border-gray-300">Nombre</th>
                   <th className="px-4 py-2 border border-gray-300">Celular</th>
                   <th className="px-4 py-2 border border-gray-300">Fecha</th>
                   <th className="px-4 py-2 border border-gray-300">Hora</th>
                   <th className="px-4 py-2 border border-gray-300">zona</th>
+                  <th className="px-4 py-2 border border-gray-300">vendedor</th>
                   <th className="px-4 py-2 border border-gray-300">Premio</th>
                 </tr>
               </thead>
@@ -155,22 +203,20 @@ export default function WinLoterias() {
                       <td className="border px-4 py-2">{match.result}</td>
 
                       <td className="border px-4 py-2">
-                        {match.match2 ? "✔️" : "❌"}
+                        {match.match2 ? " 2 cifras" : ""}
+                        {match.match3 ? " 3 cifras" : ""}
+                        {match.match4 ? " 4 cifras" : ""}
+                        {match.combi > 0 ? " Con Combi" : ""}
                       </td>
                       <td className="border px-4 py-2">
-                        {match.match3 ? "✔️" : "❌"}
-                      </td>
-                      <td className="border px-4 py-2">
-                        {match.match4 ? "✔️" : "❌"}
-                      </td>
-                      <td className="border px-4 py-2">
-                        {match.combi > 0 ? "✔️" : "❌"}
+                        {FormarPesoCopString(match.venta)}
                       </td>
                       <td className="border px-4 py-2">{match.nombre}</td>
                       <td className="border px-4 py-2">{match.celular}</td>
                       <td className="border px-4 py-2">{match.fecha}</td>
                       <td className="border px-4 py-2">{match.hora}</td>
                       <td className="border px-4 py-2">{match.zona}</td>
+                      <td className="border px-4 py-2">{match.email}</td>
                       <td className="border px-4 py-2">
                         {FormarPesoCop(match.premio)}
                       </td>

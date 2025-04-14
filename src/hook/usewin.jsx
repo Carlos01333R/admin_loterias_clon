@@ -46,7 +46,7 @@ const useLoteriaComparison = () => {
         const { data, error } = await supabase
           .from("ventas")
           .select(
-            "loterias, boletos, nombre, celular, fecha, hora, fecha_hora, numero_venta, zona, vendedor"
+            "loterias, boletos, nombre, celular, fecha, hora, fecha_hora, numero_venta, zona, vendedor, valor_bruta"
           )
           .gte("fecha_hora", date48HoursAgo); // Filtrar por fecha_hora mayor o igual a las últimas 48 horas
 
@@ -184,6 +184,7 @@ const useLoteriaComparison = () => {
                 numero_venta: venta.numero_venta,
                 zona: venta.zona,
                 email: venta.vendedor,
+                venta: venta.valor_bruta,
               });
             }
           });
