@@ -110,9 +110,32 @@ export default function Header() {
       logo: "/block.svg",
     },
     {
-      name: "Usuarios",
-      href: "/admin/users",
+      component: (
+        <DropdownCartera
+          nombre="usuarios"
+          name1="Usuarios"
+          name2="ventas Usuarios"
+          href1="/admin/users"
+          href2="/admin/vista"
+          logo1="/user.svg"
+          logo2="/user.svg"
+        />
+      ),
       logo: "/user.svg",
+    },
+    {
+      component: (
+        <DropdownCartera
+          nombre="loterias"
+          name1="Numeros mas vendidos"
+          name2="loterias"
+          href1="/admin/frecuenciaLot"
+          href2="/admin/loterias"
+          logo1="/block.svg"
+          logo2="/block.svg"
+        />
+      ),
+      logo: "/block.svg",
     },
   ];
 
