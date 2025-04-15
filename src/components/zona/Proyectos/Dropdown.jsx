@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import DeleteZona from "./deleteZona";
 import EditZona from "./EditZona";
+import EditarPremiosModal from "./EditarPremiosModal";
 
 export default function DropdownZona({
   id,
@@ -29,6 +30,12 @@ export default function DropdownZona({
     onOpenChange: onEditModalChange,
   } = useDisclosure();
 
+  const {
+    isOpen: isEditarPremiosModalOpen,
+    onOpen: onOpenEditarPremiosModal,
+    onOpenChange: onEditarPremiosModalChange,
+  } = useDisclosure();
+
   return (
     <>
       <Dropdown>
@@ -41,6 +48,14 @@ export default function DropdownZona({
           <DropdownItem key="edit">
             <button className="bg-transparent mr-1" onClick={onOpenEditModal}>
               Editar Admin
+            </button>
+          </DropdownItem>
+          <DropdownItem key="editPremios">
+            <button
+              className="bg-transparent mr-1"
+              onClick={onOpenEditarPremiosModal}
+            >
+              Editar Premios
             </button>
           </DropdownItem>
           <DropdownItem key="delete" className="text-danger" color="danger">
@@ -64,6 +79,12 @@ export default function DropdownZona({
         porcentaje_loteria={porcentaje_loteria}
         porcentaje_cliente={porcentaje_cliente}
         porcentaje_admin_zona={porcentaje_admin_zona}
+      />
+      <EditarPremiosModal
+        isOpen={isEditarPremiosModalOpen}
+        onOpenChange={onEditarPremiosModalChange}
+        id={id}
+        nombre={nombre}
       />
     </>
   );
